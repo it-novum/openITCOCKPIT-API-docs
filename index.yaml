@@ -6,8 +6,8 @@ info:
   contact:
     email: development@openitcockpit.io
   license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    name: MIT Licensed
+    url: 'https://raw.githubusercontent.com/it-novum/openITCOCKPIT-API-docs/master/LICENSE'
   version: 4.0.0
 externalDocs:
   description: Complete technical documentation
@@ -28,6 +28,8 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/add"
   /commands/edit/{commandId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/edit"
+  /commands/delete/{commandId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/delete"
 
 components:
   securitySchemes:

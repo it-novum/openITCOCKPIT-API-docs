@@ -33,3 +33,10 @@ idResponse:
       type: integer
       example: 40
       minimum: 1
+
+successResponse:
+  type: object
+  properties:
+    success:
+      type: boolean
+      example: true
