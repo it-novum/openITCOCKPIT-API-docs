@@ -34,7 +34,7 @@ requests:
             type: boolean
           example: true
         - name: page
-          in: querypostCommand
+          in: query
           description: Get page (number) of search results
           required: true
           style: form

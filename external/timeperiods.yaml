@@ -1,0 +1,118 @@
+requests:
+  index:
+    get:
+      tags:
+        - Time periods
+      summary: Find commands by name or type
+      description: Multiple status values can be provided with comma separated strings
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: asc
+            items:
+              default: asc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use sroll instead of
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+          example: Timeperiods.name
+        - name: filter[Timeperiods.name]
+          in: query
+          schema:
+            type: string
+          example: "24x"
+        - name: filter[Timeperiods.description]
+          description: Fields to return
+          in: query
+          schema:
+            type: string
+          example: "24x"
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getTimeperiodsResponse'
+      security:
+        - ApiKeyAuth: []
+
+components:
+  schemas:
+    getTimeperiodsResponse:
+      type: object
+      properties:
+        all_timeperiods:
+          $ref: '#/components/schemas/getTimeperiodsResponseCommandObject'
+        scroll:
+          $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/Scroll'
+    getTimeperiodsResponseCommandObject:
+      type: object
+      properties:
+        '0':
+          type: object
+          properties:
+            Timeperiod:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                uuid:
+                  type: string
+                  example: 41012866-6114-4853-9caf-6ffd19954e50
+                container_id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: 24x7
+                description:
+                  type: string
+                  example: 24x7
+                calendar_id:
+                  type: integer
+                  example: 0
+                allow_edit:
+                  type: boolean
+                  example: true
+                created:
+                  type: string
+                  example: "2019-03-29 16:18:29"
+                modified:
+                  type: string
+                  example: "2019-03-29 16:18:29"

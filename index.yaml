@@ -21,6 +21,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462728'
+  - name: Time periods
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23463621'
 paths:
   /commands/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
@@ -30,6 +35,8 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/edit"
   /commands/delete/{commandId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/delete"
+  /timeperiods/index.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/index"
 
 components:
   securitySchemes:
