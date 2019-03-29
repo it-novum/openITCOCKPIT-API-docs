@@ -1,0 +1,37 @@
+openapi: 3.0.1
+info:
+  title: openITCOCKPIT API
+  description: 'This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.'
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: development@openitcockpit.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 4.0.0
+externalDocs:
+  description: Complete technical documentation
+  url: 'https://docs.it-novum.com/display/ODE'
+servers:
+  - url: 'https://dev-ttriebensky.oitc.itn'
+  - url: 'https://demo.openitcockpit.io'
+tags:
+  - name: Commands
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462728'
+paths:
+  /commands/index.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
+  /commands/add.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/add"
+  /commands/edit/{commandId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/edit"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: query

@@ -1,0 +1,35 @@
+Scroll:
+  type: object
+  properties:
+    page:
+      type: integer
+      example: 1
+    limit:
+      type: integer
+      example: 25
+    offset:
+      type: integer
+      example: 0
+    hasPrevPage:
+      type: boolean
+      example: false
+    prevPage:
+      type: integer
+      example: 1
+    nextPage:
+      type: integer
+      example: 2
+    current:
+      type: integer
+      example: 1
+    hasNextPage:
+      type: boolean
+      example: true
+
+idResponse:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 40
+      minimum: 1

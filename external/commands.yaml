@@ -1,0 +1,300 @@
+requests:
+  index:
+    get:
+      tags:
+        - Commands
+      summary: Find commands by name or type
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findCommands
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: asc
+            items:
+              default: asc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use sroll instead of
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: querypostCommand
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+          example: Commands.name
+        - name: filter[Commands.name]
+          in: query
+          schema:
+            type: string
+          example: ping
+        - name: filter[Commands.command_type][]
+          description: Fields to return
+          in: query
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: integer
+              enum:
+                - 1
+                - 2
+                - 3
+                - 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getCommandsResponse'
+      security:
+        - ApiKeyAuth: []
+  add:
+    post:
+      tags:
+        - Commands
+      summary: "Add a new command"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postCommandRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
+  edit:
+    post:
+      tags:
+        - Commands
+      summary: "Edit a command"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postCommandEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: commandId
+          in: path
+          description: ID of the command to edit
+          required: true
+          schema:
+            type: integer
+          example: 40
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
+components:
+  schemas:
+    getCommandsResponse:
+      type: object
+      properties:
+        all_commands:
+          $ref: '#/components/schemas/getCommandsResponseCommandObject'
+        scroll:
+          $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/Scroll'
+      xml:
+        name: Commands
+    getCommandsResponseCommandObject:
+      type: object
+      properties:
+        '0':
+          type: object
+          properties:
+            Command:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: host-notify-by-cake
+                command_line:
+                  type: string
+                  example: /usr/share/openitcockpit/app/Console/cake nagios_notification -q --type Host --notificationtype $NOTIFICATIONTYPE$ --hostname "$HOSTNAME$" --hoststate "$HOSTSTATE$" --hostaddress "$HOSTADDRESS$" --hostoutput "$HOSTOUTPUT$" --contactmail "$CONTACTEMAIL$" --contactalias "$CONTACTALIAS$" --hostackauthor "$HOSTACKAUTHOR$" --hostackcomment "$HOSTACKCOMMENT$" --format "both"
+                command_type:
+                  type: integer
+                  example: 3
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                human_args:
+                  type: string
+                  example: null
+                uuid:
+                  type: string
+                  example: a13ff7f1-0642-4a11-be05-9931ca98da10
+                description:
+                  type: string
+                  example: Send a host notification as mail
+                type:
+                  type: string
+                  example: Notification command
+
+    postCommandRequestCommandArgument:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "$ARG1$"
+        human_name:
+          type: "string"
+          example: "Warning"
+    postCommandRequestEditCommandArgument:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "$ARG1$"
+        human_name:
+          type: "string"
+          example: "Warning"
+        id:
+          type: integer
+          description: only required for already existing command argument objects
+          example: 48
+
+    postCommandRequest:
+      type: "object"
+      required:
+        - "Command"
+      properties:
+        Command:
+          $ref: "#/components/schemas/postCommandRequestCommand"
+    postCommandEditRequest:
+      type: "object"
+      required:
+        - "Command"
+      properties:
+        Command:
+          $ref: "#/components/schemas/postCommandEditRequestCommand"
+    postCommandRequestCommand:
+      type: "object"
+      required:
+        - "name"
+        - "command_type"
+        - "command_line"
+      properties:
+        name:
+          type: "string"
+          example: "custom_check_ping"
+        command_type:
+          type: "integer"
+          format: "int64"
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+          example: 1
+        command_line:
+          type: "string"
+          example: "$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c Critical -p 10"
+        description:
+          type: "string"
+          example: "I am the description"
+        commandarguments:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postCommandRequestCommandArgument"
+    postCommandEditRequestCommand:
+      type: "object"
+      required:
+        - "name"
+        - "command_type"
+        - "command_line"
+      properties:
+        name:
+          type: "string"
+          example: "custom_check_ping"
+        command_type:
+          type: "integer"
+          format: "int64"
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+          example: 1
+        command_line:
+          type: "string"
+          example: "$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c Critical -p 10"
+        description:
+          type: "string"
+          example: "I am the description"
+        commandarguments:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postCommandRequestEditCommandArgument"
