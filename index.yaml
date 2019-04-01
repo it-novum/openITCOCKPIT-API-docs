@@ -41,6 +41,8 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/add"
   /timeperiods/edit/{timeperiodId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/edit"
+  /timeperiods/delete/{timeperiodId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/delete"
     
 components:
   securitySchemes:

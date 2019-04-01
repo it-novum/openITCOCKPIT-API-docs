@@ -142,6 +142,37 @@ requests:
       security:
         - ApiKeyAuth: []
 
+  delete:
+    post:
+      tags:
+        - Time periods
+      summary: "Delete a time period"
+      description: ""
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: timeperiodId
+          in: path
+          description: ID of the time period to delete
+          required: true
+          schema:
+            type: integer
+          example: 5
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/successResponse'
+      security:
+        - ApiKeyAuth: []
+
 components:
   schemas:
     getTimeperiodsResponse:
