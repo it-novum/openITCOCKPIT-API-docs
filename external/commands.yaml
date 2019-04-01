@@ -28,7 +28,7 @@ requests:
                 - desc
         - name: scroll
           in: query
-          description: Use sroll instead of
+          description: Use scroll instead of paging
           required: true
           schema:
             type: boolean

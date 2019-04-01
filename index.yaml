@@ -31,6 +31,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/display/ODE/Finding+contacts'
+  - name: Contact groups
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/display/ODE/Finding+contact+groups'
 paths:
   /commands/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
@@ -64,6 +69,9 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/delete"
   /contacts/copy/.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/copy"
+
+  /contactgroups/index.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/index"
 
 components:
   securitySchemes:
