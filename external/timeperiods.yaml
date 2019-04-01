@@ -65,9 +65,7 @@ requests:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/getTimeperiodsResponse'
+                $ref: '#/components/schemas/getTimeperiodsResponse'
       security:
         - ApiKeyAuth: []
 

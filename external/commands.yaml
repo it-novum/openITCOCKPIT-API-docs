@@ -73,9 +73,7 @@ requests:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/getCommandsResponse'
+                $ref: '#/components/schemas/getCommandsResponse'
       security:
         - ApiKeyAuth: []
 

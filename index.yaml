@@ -26,6 +26,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23463621'
+  - name: Contacts
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/display/ODE/Finding+contacts'
 paths:
   /commands/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
@@ -48,6 +53,9 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/delete"
   /timeperiods/copy/.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/copy"
+
+  /contacts/index.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/index"
 
 components:
   securitySchemes:

@@ -1,0 +1,239 @@
+requests:
+  index:
+    get:
+      tags:
+        - Contacts
+      summary: Find contacts by name, mail or phone
+      description: Multiple status values can be provided with comma separated strings
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: asc
+            items:
+              default: asc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use sroll instead of
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+          example: Contacts.name
+        - name: filter[Contacts.name]
+          in: query
+          schema:
+            type: string
+          example: "info"
+        - name: filter[Contacts.email]
+          in: query
+          schema:
+            type: string
+          example: ".com"
+        - name: filter[Contacts.phone]
+          in: query
+          schema:
+            type: string
+          example: "+49"
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getContactsResponse'
+
+      security:
+        - ApiKeyAuth: []
+
+components:
+  schemas:
+    getContactsResponse:
+      type: object
+      properties:
+        all_contacts:
+          $ref: '#/components/schemas/getContactsResponseContactObject'
+        scroll:
+          $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/Scroll'
+    getContactsResponseContactObject:
+      type: "array"
+      items:
+        type: "object"
+        allOf:
+          - $ref: "#/components/schemas/getContactsResponseContactArray"
+    getContactsResponseContactArray:
+      type: object
+      properties:
+        'Contact':
+          type: object
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 1
+            uuid:
+              type: string
+              example: "152aecaf-e981-4b0b-8e05-86972868547d"
+            name:
+              type: string
+              example: "info"
+            description:
+              type: string
+              example: "info contact (openitcockpit@localhost.local)"
+            email:
+              type: string
+              example: "demo@it-novum.com"
+            phone:
+              type: string
+              example: "+49000000000"
+            user_id:
+              type: integer
+              format: "int64"
+              example: 1
+            host_timeperiod_id:
+              type: integer
+              format: "int64"
+              example: 1
+            service_timeperiod_id:
+              type: integer
+              format: "int64"
+              example: 1
+            host_notifications_enabled:
+              type: integer
+              format: "int64"
+              example: 1
+            service_notifications_enabled:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_service_recovery:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_service_warning:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_service_unknown:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_service_critical:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_service_flapping:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_service_downtime:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_host_recovery:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_host_down:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_host_unreachable:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_host_flapping:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_host_downtime:
+              type: integer
+              format: "int64"
+              example: 1
+            host_push_notifications_enabled:
+              type: integer
+              format: "int64"
+              example: 1
+            service_push_notifications_enabled:
+              type: integer
+              format: "int64"
+              example: 1
+            allow_edit:
+              type: boolean
+              example: true
+        'Container':
+          type: "array"
+          items:
+            type: "object"
+            allOf:
+              - $ref: "#/components/schemas/getContactsResponseContactArrayContainer"
+    getContactsResponseContactArrayContainer:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: "int64"
+          example: 1
+        containertype_id:
+          type: integer
+          format: "int64"
+          example: 1
+        name:
+          type: string
+          example: "root"
+        parent_id:
+          type: integer
+          format: "int64"
+          example: null
+        lft:
+          type: integer
+          format: "int64"
+          example: 1
+        rght:
+          type: integer
+          format: "int64"
+          example: 60
+        _joinData:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 14
+            contact_id:
+              type: integer
+              format: "int64"
+              example: 1
+            container_id:
+              type: integer
+              format: "int64"
+              example: 1
+    
