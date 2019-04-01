@@ -177,7 +177,7 @@ requests:
     post:
       tags:
         - Time periods
-      summary: "Add a new time period"
+      summary: "Copy time period"
       description: ""
       requestBody:
         required: true
@@ -474,7 +474,7 @@ components:
               example: "my_period_copy"
             description:
               type: "string"
-              example: "I am the description"
+              example: "I am the duplicated description"
 
     postTimeperiodCopyResult:
       type: object
@@ -511,7 +511,7 @@ components:
               example: "my_period_copy"
             description:
               type: "string"
-              example: "I am the description"
+              example: "I am the duplicated description"
             id:
               type: "integer"
               format: "int64"

@@ -35,6 +35,9 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/edit"
   /commands/delete/{commandId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/delete"
+  /commands/copy/.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/copy"
+
   /timeperiods/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/index"
   /timeperiods/add.json:

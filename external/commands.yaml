@@ -181,6 +181,38 @@ requests:
       security:
         - ApiKeyAuth: []
 
+  copy:
+    post:
+      tags:
+        - Commands
+      summary: "Copy command"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postCommandCopyRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postCommandCopyResult'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
 components:
   schemas:
     getCommandsResponse:
@@ -330,3 +362,90 @@ components:
             type: object
             allOf:
               - $ref: "#/components/schemas/postCommandRequestEditCommandArgument"
+
+    postCommandCopyRequest:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/postCommandCopyRequestArray"
+    postCommandCopyRequestArray:
+      type: "array"
+      items:
+        type: "object"
+        allOf:
+          - $ref: "#/components/schemas/postCommandCopyRequestData"
+    postCommandCopyRequestData:
+      type: "object"
+      required:
+        - "Source"
+        - "Command"
+      properties:
+        Source:
+          type: object
+          properties:
+            id:
+              type: "integer"
+              format: "int64"
+              example: 3
+            name:
+              type: "string"
+              example: "check_ping"
+        Command:
+          type: object
+          properties:
+            name:
+              type: "string"
+              example: "check_ping_copy"
+            description:
+              type: "string"
+              example: "I am the duplicated description"
+            command_line:
+              type: "string"
+              example: "$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 5"
+
+    postCommandCopyResult:
+      type: object
+      properties:
+        result:
+          $ref: "#/components/schemas/postCommandCopyResultArray"
+    postCommandCopyResultArray:
+      type: array
+      items:
+        type: "object"
+        allOf:
+          - $ref: "#/components/schemas/postCommandCopyResultData"
+    postCommandCopyResultData:
+      type: "object"
+      required:
+        - "Source"
+        - "Command"
+      properties:
+        Source:
+          type: object
+          properties:
+            id:
+              type: "integer"
+              format: "int64"
+              example: 3
+            name:
+              type: "string"
+              example: "check_ping"
+        Command:
+          type: object
+          properties:
+            name:
+              type: "string"
+              example: "check_ping_copy"
+            description:
+              type: "string"
+              example: "I am the duplicated description"
+            command_line:
+              type: "string"
+              example: "$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 5"
+            id:
+              type: "integer"
+              format: "int64"
+              example: 47
+        Error:
+          type: object
+          example: []
