@@ -37,7 +37,11 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/delete"
   /timeperiods/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/index"
-
+  /timeperiods/add.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/add"
+  /timeperiods/edit/{timeperiodId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/edit"
+    
 components:
   securitySchemes:
     ApiKeyAuth:

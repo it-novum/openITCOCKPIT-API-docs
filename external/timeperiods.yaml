@@ -71,6 +71,77 @@ requests:
       security:
         - ApiKeyAuth: []
 
+  add:
+    post:
+      tags:
+        - Time periods
+      summary: "Add a new time period"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postTimeperiodRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postTimeperiodResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
+  edit:
+    post:
+      tags:
+        - Time periods
+      summary: "Edit a time period"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postTimeperiodEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: timeperiodId
+          in: path
+          description: ID of the time period to edit
+          required: true
+          schema:
+            type: integer
+          example: 5
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/editIdResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
 components:
   schemas:
     getTimeperiodsResponse:
@@ -116,3 +187,191 @@ components:
                 modified:
                   type: string
                   example: "2019-03-29 16:18:29"
+
+    postTimeperiodRequest:
+      type: "object"
+      required:
+        - "Timeperiod"
+      properties:
+        Timeperiod:
+          $ref: "#/components/schemas/postTimeperiodRequestTimeperiod"
+    postTimeperiodRequestTimeperiod:
+      type: "object"
+      required:
+        - "name"
+        - "container_id"
+        - "command_line"
+      properties:
+        name:
+          type: "string"
+          example: "my_period"
+        container_id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        calendar_id:
+          type: "integer"
+          format: "int64"
+        description:
+          type: "string"
+          example: "I am the description"
+        timeperiod_timeranges:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postTimeperiodRequestTimeperiodTimeranges"
+        validate_timeranges:
+          type: boolean
+          example: true
+    postTimeperiodRequestTimeperiodTimeranges:
+      type: "object"
+      properties:
+        day:
+          type: "integer"
+          format: "int64"
+          example: "1"
+          description: "The week starts with monday as day 1"
+        start:
+          type: "string"
+          example: "09:00"
+          description: "Start time; separate hours and minutes with a colon"
+        end:
+          type: "string"
+          example: "11:00"
+          description: "End time; separate hours and minutes with a colon"
+
+    postTimeperiodResponse:
+      type: "object"
+      properties:
+        timeperiod:
+          $ref: "#/components/schemas/postTimeperiodResponseTimeperiod"
+    postTimeperiodResponseTimeperiod:
+      type: "object"
+      required:
+        - "name"
+        - "container_id"
+        - "command_line"
+      properties:
+        name:
+          type: "string"
+          example: "my_period"
+        container_id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        calendar_id:
+          type: "integer"
+          format: "int64"
+          example: 0
+        description:
+          type: "string"
+          example: "I am the description"
+        timeperiod_timeranges:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postTimeperiodResponseTimeperiodTimeranges"
+        uuid:
+          type: "string"
+          example: "e7448fb1-47b0-4082-9ed4-3354e16391ef"
+        created:
+          type: "string"
+          example: "2019-04-01T08:40:25+02:00"
+        modified:
+          type: "string"
+          example: "2019-04-01T08:40:25+02:00"
+        id:
+          type: "integer"
+          example: 5
+          minimum: 1
+    postTimeperiodResponseTimeperiodTimeranges:
+      type: "object"
+      properties:
+        day:
+          type: "integer"
+          format: "int64"
+          example: "1"
+          description: "The week starts with monday as day 1"
+        start:
+          type: "string"
+          example: "09:00"
+          description: "Start time; separate hours and minutes with a colon"
+        end:
+          type: "string"
+          example: "11:00"
+          description: "End time; separate hours and minutes with a colon"
+        timeperiod_id:
+          type: "integer"
+          example: 5
+          minimum: 1
+        id:
+          type: "integer"
+          example: 12
+          minimum: 1
+
+    postTimeperiodEditRequest:
+      type: "object"
+      required:
+        - "Timeperiod"
+      properties:
+        Timeperiod:
+          $ref: "#/components/schemas/postTimeperiodEditRequestTimeperiod"
+    postTimeperiodEditRequestTimeperiod:
+      type: "object"
+      required:
+        - "name"
+        - "container_id"
+        - "command_line"
+      properties:
+        name:
+          type: "string"
+          example: "my_period"
+        container_id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        calendar_id:
+          type: "integer"
+          format: "int64"
+          example: 0
+        description:
+          type: "string"
+          example: "I am the description"
+        timeperiod_timeranges:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postTimeperiodEditRequestTimeperiodTimeranges"
+        validate_timeranges:
+          type: boolean
+          example: true
+    postTimeperiodEditRequestTimeperiodTimeranges:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 12
+        day:
+          type: "integer"
+          format: "int64"
+          example: "1"
+          description: "The week starts with monday as day 1"
+        start:
+          type: "string"
+          example: "09:00"
+          description: "Start time; separate hours and minutes with a colon"
+        end:
+          type: "string"
+          example: "11:00"
+          description: "End time; separate hours and minutes with a colon"
+    editIdResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 5
+          minimum: 1
