@@ -58,6 +58,8 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/index"
   /contacts/add.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/add"
+  /contacts/edit/{contactId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/edit"
 
 components:
   securitySchemes:
