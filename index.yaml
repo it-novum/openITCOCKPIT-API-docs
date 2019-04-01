@@ -60,6 +60,10 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/add"
   /contacts/edit/{contactId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/edit"
+  /contacts/delete/{contactId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/delete"
+  /contacts/copy/.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/copy"
 
 components:
   securitySchemes:

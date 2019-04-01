@@ -176,6 +176,38 @@ requests:
       security:
         - ApiKeyAuth: []
 
+  copy:
+    post:
+      tags:
+        - Contacts
+      summary: "Copy contact"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postContactCopyRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postContactCopyResult'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
 components:
   schemas:
     getContactsResponse:
@@ -589,8 +621,8 @@ components:
           items:
             type: object
             allOf:
-              - $ref: "#/components/schemas/postContactRequestCEditontactCustomvariables"
-    postContactRequestCEditontactCustomvariables:
+              - $ref: "#/components/schemas/postContactRequestEditContactCustomvariables"
+    postContactRequestEditContactCustomvariables:
       type: "object"
       required:
         - id
@@ -614,3 +646,99 @@ components:
         value:
           type: string
           example: "myCustomValue"
+
+    postContactCopyRequest:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/postContactCopyRequestArray"
+    postContactCopyRequestArray:
+      type: "array"
+      items:
+        type: "object"
+        allOf:
+          - $ref: "#/components/schemas/postContactCopyRequestData"
+    postContactCopyRequestData:
+      type: "object"
+      required:
+        - "Source"
+        - "Contact"
+      properties:
+        Source:
+          type: object
+          properties:
+            id:
+              type: "integer"
+              format: "int64"
+              example: 1
+            name:
+              type: "string"
+              example: "info"
+        Contact:
+          type: object
+          required:
+            - name
+            - description
+            - email
+          properties:
+            name:
+              type: "string"
+              example: "info copy"
+            description:
+              type: "string"
+              example: "info contact duplicate"
+            email:
+              type: "string"
+              example: "openitcockpit@localhost.local"
+            phone:
+              type: "string"
+              example: "+49000000"
+
+    postContactCopyResult:
+      type: object
+      properties:
+        result:
+          $ref: "#/components/schemas/postContactCopyResultArray"
+    postContactCopyResultArray:
+      type: array
+      items:
+        type: "object"
+        allOf:
+          - $ref: "#/components/schemas/postContactCopyResultData"
+    postContactCopyResultData:
+      type: "object"
+      required:
+        - "Source"
+        - "Contact"
+      properties:
+        Source:
+          type: object
+          properties:
+            id:
+              type: "integer"
+              format: "int64"
+              example: 1
+            name:
+              type: "string"
+              example: "info"
+        Command:
+          type: object
+          properties:
+            name:
+              type: "string"
+              example: "info copy"
+            description:
+              type: "string"
+              example: "info contact duplicate"
+            email:
+              type: "string"
+              example: "openitcockpit@localhost.local"
+            phone:
+              type: "string"
+              example: "+49000000"
+            id:
+              type: "integer"
+              example: 3
+        Error:
+          type: object
+          example: []
