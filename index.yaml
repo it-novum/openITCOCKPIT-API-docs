@@ -76,6 +76,10 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/add"
   /contactgroups/edit/{contactgroupId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/edit"
+  /contactgroups/delete/{contactgroupId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/delete"
+  /contactgroups/copy/.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/copy"
 
 components:
   securitySchemes:
