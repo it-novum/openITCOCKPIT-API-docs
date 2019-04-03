@@ -94,6 +94,46 @@ requests:
       security:
         - ApiKeyAuth: []
 
+  edit:
+    post:
+      tags:
+        - Host templates
+      summary: "Edit a host template"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postHosttemplatesEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hosttemplateId
+          in: path
+          description: ID of the host template to edit
+          required: true
+          schema:
+            type: integer
+          example: 3
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
+
 components:
   schemas:
     getHosttemplatesResponse:
@@ -291,9 +331,6 @@ components:
           $ref: "#/components/schemas/postHosttemplatesRequestHosttemplate"
     postHosttemplatesRequestHosttemplate:
       type: "object"
-      required:
-        - "containers"
-        - "contacts"
       properties:
         name:
           type: string
@@ -538,3 +575,298 @@ components:
             command_id:
               type: integer
               example: 4
+
+    postHosttemplatesEditRequest:
+      type: "object"
+      required:
+        - "Hosttemplate"
+      properties:
+        Hosttemplate:
+          $ref: "#/components/schemas/postHosttemplatesEditRequestHosttemplate"
+    postHosttemplatesEditRequestHosttemplate:
+      type: "object"
+      properties:
+        name:
+          type: string
+          example: "default host 2"
+        description:
+          type: string
+          example: "default hosts example"
+        hosttemplatetype_id:
+          type: integer
+          format: "int64"
+          example: 1
+        command_id:
+          type: integer
+          format: "int64"
+          example: 4
+        check_command_args:
+          type: string
+          example: ""
+        eventhandler_command_id:
+          type: integer
+          format: "int64"
+          example: 0
+        timeperiod_id:
+          type: integer
+          format: "int64"
+          example: 0
+        check_interval:
+          type: integer
+          format: "int64"
+          example: 7200
+        retry_interval:
+          type: integer
+          format: "int64"
+          example: 60
+        max_check_attempts:
+          type: integer
+          format: "int64"
+          example: 3
+        first_notification_delay:
+          type: integer
+          format: "int64"
+          example: 0
+        notification_interval:
+          type: integer
+          format: "int64"
+          example: 7200
+        notify_on_down:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_unreachable:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_recovery:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_flapping:
+          type: integer
+          format: "int64"
+          example: 0
+        notify_on_downtime:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_up:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_down:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_unreachable:
+          type: integer
+          format: "int64"
+          example: 0
+        low_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        high_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        process_performance_data:
+          type: integer
+          format: "int64"
+          example: 0
+        freshness_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        freshness_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        passive_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 1
+        event_handler_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        active_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 1
+        retain_status_information:
+          type: integer
+          format: "int64"
+          example: 0
+        retain_nonstatus_information:
+          type: integer
+          format: "int64"
+          example: 0
+        notifications_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        notes:
+          type: string
+          example: "custom note"
+        priority:
+          type: integer
+          format: "int64"
+          example: 3
+        check_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        tags:
+          type: string
+          example: "dev,api"
+        container_id:
+          type: integer
+          format: "int64"
+          example: 1
+        host_url:
+          type: string
+          example: "https://test.example.org?host=$HOSTNAME$"
+        contacts:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        contactgroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 7
+        hostgroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        customvariables:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postHosttemplatesEditRequestHosttemplateCustomvariables"
+        hosttemplatecommandargumentvalues:
+          type: array
+          items:
+            type: object
+            anyOf:
+              - $ref: "#/components/schemas/postHosttemplatesEditRequestHosttemplateCommandargumentvalues1"
+              - $ref: "#/components/schemas/postHosttemplatesEditRequestHosttemplateCommandargumentvalues2"
+
+    postHosttemplatesEditRequestHosttemplateCustomvariables:
+      type: "object"
+      required:
+        - id
+        - object_id
+        - objecttype_id
+        - name
+        - value
+      properties:
+        id:
+          type: integer
+          example: 10
+        object_id:
+          type: integer
+          example: 4
+        objecttype_id:
+          type: integer
+          example: 512
+        name:
+          type: string
+          example: "TESTVALUE"
+        value:
+          type: string
+          example: "test"
+    postHosttemplatesEditRequestHosttemplateCommandargumentvalues1:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - hosttemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 7
+        commandargument_id:
+          type: integer
+          example: 3
+        hosttemplate_id:
+          type: integer
+          example: 4
+        value:
+          type: string
+          example: "3000.0,80%"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 3
+            command_id:
+              type: integer
+              example: 4
+            name:
+              type: string
+              example: $ARG1$
+            human_name:
+              type: string
+              example: Warning
+    postHosttemplatesEditRequestHosttemplateCommandargumentvalues2:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - hosttemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 8
+        commandargument_id:
+          type: integer
+          example: 4
+        hosttemplate_id:
+          type: integer
+          example: 4
+        value:
+          type: string
+          example: "5000.0,100%"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 4
+            command_id:
+              type: integer
+              example: 4
+            name:
+              type: string
+              example: $ARG2$
+            human_name:
+              type: string
+              example: Critical
