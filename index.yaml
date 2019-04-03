@@ -36,6 +36,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/display/ODE/Finding+contact+groups'
+  - name: Host templates
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462734'
 paths:
   /commands/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
@@ -80,6 +85,10 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/delete"
   /contactgroups/copy/.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/copy"
+
+  /hosttemplates/index.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/index"
+
 
 components:
   securitySchemes:
