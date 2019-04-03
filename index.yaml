@@ -92,6 +92,8 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/add"
   /hosttemplates/edit/{hosttemplateId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/edit"
+  /hosttemplates/delete/{hosttemplateId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/delete"
 
 components:
   securitySchemes:
