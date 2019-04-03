@@ -88,7 +88,8 @@ paths:
 
   /hosttemplates/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/index"
-
+  /hosttemplates/add.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/add"
 
 components:
   securitySchemes:
