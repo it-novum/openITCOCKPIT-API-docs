@@ -221,7 +221,7 @@ components:
       type: "array"
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/getContactsResponseContactArray"
     getContactsResponseContactArray:
       type: object
@@ -327,7 +327,7 @@ components:
           type: "array"
           items:
             type: "object"
-            allOf:
+            anyOf:
               - $ref: "#/components/schemas/getContactsResponseContactArrayContainer"
     getContactsResponseContactArrayContainer:
       type: object
@@ -486,7 +486,7 @@ components:
           type: array
           items:
             type: object
-            allOf:
+            anyOf:
               - $ref: "#/components/schemas/postContactRequestContactCustomvariables"
     postContactRequestContactCustomvariables:
       type: "object"
@@ -620,7 +620,7 @@ components:
           type: array
           items:
             type: object
-            allOf:
+            anyOf:
               - $ref: "#/components/schemas/postContactRequestEditContactCustomvariables"
     postContactRequestEditContactCustomvariables:
       type: "object"
@@ -656,7 +656,7 @@ components:
       type: "array"
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/postContactCopyRequestData"
     postContactCopyRequestData:
       type: "object"
@@ -703,7 +703,7 @@ components:
       type: array
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/postContactCopyResultData"
     postContactCopyResultData:
       type: "object"

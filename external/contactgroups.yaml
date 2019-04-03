@@ -216,7 +216,7 @@ components:
       type: "array"
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/getContactgroupsResponseContactgroupArray"
     getContactgroupsResponseContactgroupArray:
       type: object
@@ -374,7 +374,7 @@ components:
       type: "array"
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/postContactgroupCopyRequestData"
     postContactgroupCopyRequestData:
       type: "object"
@@ -417,7 +417,7 @@ components:
       type: array
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/postContactgroupCopyResultData"
     postContactgroupCopyResultData:
       type: "object"

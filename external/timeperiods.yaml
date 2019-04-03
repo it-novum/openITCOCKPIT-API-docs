@@ -280,7 +280,7 @@ components:
           type: array
           items:
             type: object
-            allOf:
+            anyOf:
               - $ref: "#/components/schemas/postTimeperiodRequestTimeperiodTimeranges"
         validate_timeranges:
           type: boolean
@@ -332,7 +332,7 @@ components:
           type: array
           items:
             type: object
-            allOf:
+            anyOf:
               - $ref: "#/components/schemas/postTimeperiodResponseTimeperiodTimeranges"
         uuid:
           type: "string"
@@ -404,7 +404,7 @@ components:
           type: array
           items:
             type: object
-            allOf:
+            anyOf:
               - $ref: "#/components/schemas/postTimeperiodEditRequestTimeperiodTimeranges"
         validate_timeranges:
           type: boolean
@@ -446,7 +446,7 @@ components:
       type: "array"
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/postTimeperiodCopyRequestData"
     postTimeperiodCopyRequestData:
       type: "object"
@@ -483,7 +483,7 @@ components:
       type: array
       items:
         type: "object"
-        allOf:
+        anyOf:
           - $ref: "#/components/schemas/postTimeperiodCopyResultData"
     postTimeperiodCopyResultData:
       type: "object"
