@@ -41,6 +41,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462734'
+  - name: Hosts
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462732'
 paths:
   /commands/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
@@ -96,6 +101,9 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/delete"
   /hosttemplates/copy/.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/copy"
+
+  /hosts/index.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/index"
 
 components:
   securitySchemes:
