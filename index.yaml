@@ -1,8 +1,7 @@
 openapi: 3.0.1
 info:
   title: openITCOCKPIT API
-  description: 'This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.'
-  termsOfService: 'http://swagger.io/terms/'
+  description: 'This is a openITCOCKPIT API description (alpha).<br>You can find out more about openITCOCKPIT at [https://openitcockpit.io](https://openitcockpit.io) or use our community IRC Channel at [irc.freenode.net, #openitcockpit](https://kiwiirc.com/nextclient/irc.freenode.net/#openitcockpit).<br><br>For this api sample, you can use the api key `b982bb115085a9ade370a56cfd884f536b38de809cef5b105933af1f1a584dc8b2eef3fba4c04794d384a68bffe123ef33d5c9298f40403534fb014681dc6946732d762ccfa324326b320422d4ca5088` to authorize yourself.'
   contact:
     email: development@openitcockpit.io
   license:
