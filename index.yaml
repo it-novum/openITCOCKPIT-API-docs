@@ -104,6 +104,12 @@ paths:
 
   /hosts/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/index"
+  /hosts/add.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/add"
+  /hosts/edit/{hostId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/edit"
+  /hosts/delete/{hostId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/delete"
 
 components:
   securitySchemes:

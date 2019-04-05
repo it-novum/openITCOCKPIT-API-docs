@@ -131,6 +131,107 @@ requests:
                 $ref: '#/components/schemas/getHostResponse'
       security:
         - ApiKeyAuth: []
+  add:
+    post:
+      tags:
+        - Hosts
+      summary: "Add a new host"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postHostsRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
+  edit:
+    post:
+      tags:
+        - Hosts
+      summary: "Add a new host"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postHostsRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostId
+          in: path
+          description: ID of the host to edit
+          required: true
+          schema:
+            type: integer
+          example: 3
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
+  delete:
+    post:
+      tags:
+        - Hosts
+      summary: "Delete a host"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostId
+          in: path
+          description: ID of the host to delete
+          required: true
+          schema:
+            type: integer
+          example: 4
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/successResponse'
+      security:
+        - ApiKeyAuth: []
+
 
 components:
   schemas:
@@ -297,5 +398,288 @@ components:
                   type: integer
                   example: 0
             total:
+              type: integer
+              example: 4
+
+    postHostsRequest:
+      type: "object"
+      required:
+        - "Host"
+      properties:
+        Host:
+          $ref: "#/components/schemas/postHostsRequestHost"
+    postHostsRequestHost:
+      type: "object"
+      properties:
+        name:
+          type: string
+          example: "example"
+        description:
+          type: string
+          example: "default host"
+        hosttemplate_id:
+          type: integer
+          format: "int64"
+          example: 1
+        address:
+          type: string
+          example: "ex.ample.com"
+        command_id:
+          type: integer
+          format: "int64"
+          example: 4
+        eventhandler_command_id:
+          type: integer
+          format: "int64"
+          example: 0
+        check_interval:
+          type: integer
+          format: "int64"
+          example: 7200
+        retry_interval:
+          type: integer
+          format: "int64"
+          example: 60
+        max_check_attempts:
+          type: integer
+          format: "int64"
+          example: 3
+        first_notification_delay:
+          type: integer
+          format: "int64"
+          example: 0
+        notification_interval:
+          type: integer
+          format: "int64"
+          example: 7200
+        notify_on_down:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_unreachable:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_recovery:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_flapping:
+          type: integer
+          format: "int64"
+          example: 0
+        notify_on_downtime:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_up:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_down:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_unreachable:
+          type: integer
+          format: "int64"
+          example: 0
+        low_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        high_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        process_performance_data:
+          type: integer
+          format: "int64"
+          example: 0
+        freshness_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        freshness_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        passive_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        event_handler_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        active_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 1
+        retain_status_information:
+          type: integer
+          format: "int64"
+          example: 0
+        retain_nonstatus_information:
+          type: integer
+          format: "int64"
+          example: 0
+        notifications_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        notes:
+          type: string
+          example: "custom note"
+        priority:
+          type: integer
+          format: "int64"
+          minimum: 1
+          maximum: 5
+          example: 5
+        check_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        tags:
+          type: string
+          example: "ex,ample,api"
+        container_id:
+          type: integer
+          format: "int64"
+          example: 1
+        host_url:
+          type: string
+          example: "https://test.example.org?host=$HOSTNAME$"
+        satellite_id:
+          type: integer
+          format: "int64"
+          example: 0
+        contacts:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        contactgroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 7
+        hostgroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        hosts_to_containers_sharing:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 2
+        parenthosts:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example:
+        customvariables:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postHostsRequestHostCustomvariables"
+        hostcommandargumentvalues:
+          type: array
+          items:
+            type: object
+            anyOf:
+              - $ref: "#/components/schemas/postHostsRequestHostCommandargumentvalues1"
+              - $ref: "#/components/schemas/postHostsRequestHostCommandargumentvalues2"
+
+    postHostsRequestHostCustomvariables:
+      type: "object"
+      required:
+        - objecttype_id
+        - name
+        - value
+      properties:
+        objecttype_id:
+          type: integer
+          example: 256
+        name:
+          type: string
+          example: "TEST"
+        value:
+          type: string
+          example: "examplevalue"
+    postHostsRequestHostCommandargumentvalues1:
+      type: "object"
+      required:
+        - commandargument_id
+        - value
+        - commandargument
+      properties:
+        commandargument_id:
+          type: integer
+          example: 3
+        value:
+          type: string
+          example: "3000.0,80%"
+        commandargument:
+          type: object
+          properties:
+            name:
+              type: string
+              example: $ARG1$
+            human_name:
+              type: string
+              example: Warning
+            command_id:
+              type: integer
+              example: 4
+    postHostsRequestHostCommandargumentvalues2:
+      type: "object"
+      required:
+        - objecttype_id
+        - value
+        - commandargument
+      properties:
+        commandargument_id:
+          type: integer
+          example: 4
+        value:
+          type: string
+          example: "5000.0,100%"
+        commandargument:
+          type: object
+          properties:
+            name:
+              type: string
+              example: $ARG2$
+            human_name:
+              type: string
+              example: Critical
+            command_id:
               type: integer
               example: 4
