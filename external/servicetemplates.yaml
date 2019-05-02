@@ -1,0 +1,287 @@
+requests:
+  index:
+    get:
+      tags:
+        - Service templates
+      summary: Find service templates by name, service name or description
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: asc
+            items:
+              default: asc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use scroll instead of paging
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+          example: Servicetemplates.template_name
+        - name: filter[Servicetemplates.template_name]
+          in: query
+          schema:
+            type: string
+          description: Filter by service template name
+        - name: filter[Servicetemplates.description]
+          in: query
+          schema:
+            type: string
+          description: Filter by service template description
+        - name: filter[Servicetemplates.name]
+          in: query
+          schema:
+            type: string
+          description: Filter by service name
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getServicetemplatesResponse'
+      security:
+        - ApiKeyAuth: []
+
+
+components:
+  schemas:
+    getServicetemplatesResponse:
+      type: object
+      properties:
+        all_servicetemplates:
+          $ref: '#/components/schemas/getServicetemplatesResponseHosttemplateObject'
+        scroll:
+          $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/Scroll'
+
+    getServicetemplatesResponseHosttemplateObject:
+      type: "array"
+      items:
+        type: "object"
+        anyOf:
+          - $ref: "#/components/schemas/getServicetemplatesResponseHosttemplateArray"
+
+    getServicetemplatesResponseHosttemplateArray:
+      type: object
+      properties:
+        'Servicetemplate':
+          type: object
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 1
+            uuid:
+              type: string
+              example: "3eb9db30-c9cf-4c25-9c69-0c3c01dc2256"
+            template_name:
+              type: string
+              example: "Ping"
+            name:
+              type: string
+              example: "Ping"
+            description:
+              type: string
+              example: "Lan-Ping"
+            servicetemplatetype_id:
+              type: integer
+              format: "int64"
+              example: 1
+            container_id:
+              type: integer
+              format: "int64"
+              example: 1
+            eventhandler_command_id:
+              type: integer
+              format: "int64"
+              example: 0
+            check_period_id:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_period_id:
+              type: integer
+              format: "int64"
+              example: 1
+            command_id:
+              type: integer
+              format: "int64"
+              example: 3
+            check_command_args:
+              type: string
+              example: ""
+            checkcommand_info:
+              type: string
+              example: ""
+            timeperiod_id:
+              type: integer
+              format: "int64"
+              example: 0
+            check_interval:
+              type: integer
+              format: "int64"
+              example: 300
+            retry_interval:
+              type: integer
+              format: "int64"
+              example: 60
+            max_check_attempts:
+              type: integer
+              format: "int64"
+              example: 3
+            first_notification_delay:
+              type: integer
+              format: "int64"
+              example: 0
+            notification_interval:
+              type: integer
+              format: "int64"
+              example: 7200
+
+            notify_on_warning:
+              type: integer
+              format: "int64"
+              example: 0
+            notify_on_unknown:
+              type: integer
+              format: "int64"
+              example: 0
+            notify_on_critical:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_on_recovery:
+              type: integer
+              format: "int64"
+              example: 1
+            notify_on_flapping:
+              type: integer
+              format: "int64"
+              example: 0
+            notify_on_downtime:
+              type: integer
+              format: "int64"
+              example: 0
+            flap_detection_enabled:
+              type: integer
+              format: "int64"
+              example: 0
+            flap_detection_on_ok:
+              type: integer
+              format: "int64"
+              example: 0
+            flap_detection_on_warning:
+              type: integer
+              format: "int64"
+              example: 0
+            flap_detection_on_unknown:
+              type: integer
+              format: "int64"
+              example: 0
+            flap_detection_on_critical:
+              type: integer
+              format: "int64"
+              example: 0
+            low_flap_threshold:
+              type: integer
+              format: "int64"
+              example: 0
+            high_flap_threshold:
+              type: integer
+              format: "int64"
+              example: 0
+            process_performance_data:
+              type: integer
+              format: "int64"
+              example: 1
+            freshness_checks_enabled:
+              type: integer
+              format: "int64"
+              example: 0
+            freshness_threshold:
+              type: integer
+              format: "int64"
+              example: null
+            passive_checks_enabled:
+              type: integer
+              format: "int64"
+              example: 0
+            event_handler_enabled:
+              type: integer
+              format: "int64"
+              example: 0
+            active_checks_enabled:
+              type: integer
+              format: "int64"
+              example: 1
+            retain_status_information:
+              type: integer
+              format: "int64"
+              example: 0
+            retain_nonstatus_information:
+              type: integer
+              format: "int64"
+              example: 0
+            notifications_enabled:
+              type: integer
+              format: "int64"
+              example: 0
+            notes:
+              type: string
+              example: ""
+            priority:
+              type: integer
+              format: "int64"
+              example: 1
+            tags:
+              type: string
+              example: ""
+            service_url:
+              type: string
+              example: ""
+            is_volatile:
+              type: integer
+              format: "int64"
+              example: 0
+            check_freshness:
+              type: integer
+              format: "int64"
+              example: 0
+            created:
+              type: string
+              example: "2015-01-05 15:20:14"
+            modified:
+              type: string
+              example: "2015-01-15 23:46:17"
+            allow_edit:
+              type: boolean
+              example: true
