@@ -72,6 +72,37 @@ requests:
       security:
         - ApiKeyAuth: []
 
+  add:
+    post:
+      tags:
+        - Service templates
+      summary: "Add a new service template"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postServicetemplatesRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
 
 components:
   schemas:
@@ -285,3 +316,278 @@ components:
             allow_edit:
               type: boolean
               example: true
+
+    postServicetemplatesRequest:
+      type: "object"
+      required:
+        - "Servicetemplate"
+      properties:
+        Servicetemplate:
+          $ref: "#/components/schemas/postServicetemplatesRequestServicetemplate"
+
+    postServicetemplatesRequestServicetemplate:
+      type: "object"
+      properties:
+        name:
+          type: string
+          example: "Ping 2"
+        template_name:
+          type: string
+          example: "Ping 2"
+        description:
+          type: string
+          example: "I am a better ping"
+        command_id:
+          type: integer
+          format: "int64"
+          example: 3
+        eventhandler_command_id:
+          type: integer
+          format: "int64"
+          example: 0
+        check_interval:
+          type: integer
+          format: "int64"
+          example: 300
+        retry_interval:
+          type: integer
+          format: "int64"
+          example: 60
+        max_check_attempts:
+          type: integer
+          format: "int64"
+          example: 3
+        first_notification_delay:
+          type: integer
+          format: "int64"
+          example: 0
+        notification_interval:
+          type: integer
+          format: "int64"
+          example: 7200
+        notify_on_recovery:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_warning:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_critical:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_unknown:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_flapping:
+          type: integer
+          format: "int64"
+          example: 0
+        notify_on_downtime:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_ok:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_warning:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_critical:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_unknown:
+          type: integer
+          format: "int64"
+          example: 0
+        low_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        high_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        process_performance_data:
+          type: integer
+          format: "int64"
+          example: 1
+        freshness_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        freshness_threshold:
+          type: integer
+          format: "int64"
+          example: 3600
+        passive_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 1
+        event_handler_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        active_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 1
+        retain_status_information:
+          type: integer
+          format: "int64"
+          example: 0
+        retain_nonstatus_information:
+          type: integer
+          format: "int64"
+          example: 0
+        notifications_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        notes:
+          type: string
+          example: "custom note"
+        priority:
+          type: integer
+          format: "int64"
+          example: 1
+        check_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        tags:
+          type: string
+          example: ""
+        container_id:
+          type: integer
+          format: "int64"
+          example: 1
+        service_url:
+          type: string
+          example: ""
+        is_volatile:
+          type: integer
+          format: "int64"
+          example: 0
+        contacts:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        contactgroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 7
+        servicegroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 3
+        customvariables:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postServicetemplatesRequestServicetemplateCustomvariables"
+        servicetemplatecommandargumentvalues:
+          type: array
+          items:
+            type: object
+            anyOf:
+              - $ref: "#/components/schemas/postServicetemplatesRequestServicetemplateCommandargumentvalues1"
+              - $ref: "#/components/schemas/postServicetemplatesRequestServicetemplateCommandargumentvalues2"
+        servicetemplateeventcommandargumentvalues:
+          type: array
+          items:
+            type: object
+            example: null
+
+    postServicetemplatesRequestServicetemplateCustomvariables:
+      type: "object"
+      required:
+        - objecttype_id
+        - name
+        - value
+      properties:
+        objecttype_id:
+          type: integer
+          example: 512
+        name:
+          type: string
+          example: "TESTVALUE"
+        value:
+          type: string
+          example: "test"
+    postServicetemplatesRequestServicetemplateCommandargumentvalues1:
+      type: "object"
+      required:
+        - commandargument_id
+        - value
+        - commandargument
+      properties:
+        commandargument_id:
+          type: integer
+          example: 1
+        value:
+          type: string
+          example: "100.0,20%"
+        commandargument:
+          type: object
+          properties:
+            name:
+              type: string
+              example: $ARG1$
+            human_name:
+              type: string
+              example: Warning
+            command_id:
+              type: integer
+              example: 3
+    postServicetemplatesRequestServicetemplateCommandargumentvalues2:
+      type: "object"
+      required:
+        - objecttype_id
+        - value
+        - commandargument
+      properties:
+        commandargument_id:
+          type: integer
+          example: 2
+        value:
+          type: string
+          example: "500.0,60%"
+        commandargument:
+          type: object
+          properties:
+            name:
+              type: string
+              example: $ARG2$
+            human_name:
+              type: string
+              example: Critical
+            command_id:
+              type: integer
+              example: 3

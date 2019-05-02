@@ -117,6 +117,8 @@ paths:
 
   /servicetemplates/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/index"
+  /servicetemplates/add.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/add"
 
 components:
   securitySchemes:
