@@ -141,7 +141,35 @@ requests:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
         - ApiKeyAuth: []
-
+  delete:
+    post:
+      tags:
+        - Service templates
+      summary: "Delete a service template"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: servicetemplateId
+          in: path
+          description: ID of the service template to delete
+          required: true
+          schema:
+            type: integer
+          example: 56
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/successResponse'
+      security:
+        - ApiKeyAuth: []
 
 components:
   schemas:

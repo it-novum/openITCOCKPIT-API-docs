@@ -121,6 +121,8 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/add"
   /servicetemplates/edit/{servicetemplateId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/edit"
+  /servicetemplates/delete/{servicetemplateId}.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/delete"
 
 components:
   securitySchemes:
