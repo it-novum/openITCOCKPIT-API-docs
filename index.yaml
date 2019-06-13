@@ -50,6 +50,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462744'
+  - name: Services
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462740'
 paths:
   /commands/index.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
@@ -123,6 +128,10 @@ paths:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/edit"
   /servicetemplates/delete/{servicetemplateId}.json:
     $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/delete"
+
+  /services/index.json:
+    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/services.yaml#/requests/index"
+
 
 components:
   securitySchemes:

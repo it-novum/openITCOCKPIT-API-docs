@@ -1,0 +1,378 @@
+requests:
+  index:
+    get:
+      tags:
+        - Services
+      summary: Find services
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: desc
+            items:
+              default: desc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use scroll instead of paging
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+            example: ""
+          example: Servicestatus.current_state
+        - name: filter[Hosts.name]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by host name
+        - name: filter[servicename]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by service name
+        - name: filter[keywords][]
+          in: query
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              additionalProperties: true
+          description: Filter by service tags
+        - name: filter[not_keywords][]
+          in: query
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              additionalProperties: true
+          description: Filter by service has not tags
+        - name: filter[Servicestatus.current_state][]
+          in: query
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ok
+                - warning
+                - critical
+                - unknown
+          description: Filter by service state
+        - name: filter[Servicestatus.output]
+          in: query
+          schema:
+            type: string
+          description: Filter by service output
+        - name: filter[Servicestatus.problem_has_been_acknowledged]
+          in: query
+          schema:
+            type: boolean
+          example: ""
+          description: Filter by service problem_has_been_acknowledged
+        - name: filter[Servicestatus.scheduled_downtime_depth]
+          in: query
+          schema:
+            type: boolean
+          example: ""
+          description: Filter by service scheduled_downtime_depth
+        - name: filter[Servicestatus.active_checks_enabled]
+          in: query
+          schema:
+            type: boolean
+          example: ""
+          description: Filter by service active_checks_enabled
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getServiceResponse'
+      security:
+        - ApiKeyAuth: []
+
+
+components:
+  schemas:
+    getServiceResponse:
+      type: object
+      properties:
+        all_services:
+          $ref: '#/components/schemas/getServicesResponseServiceObject'
+        scroll:
+          $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/Scroll'
+    getServicesResponseServiceObject:
+      type: "array"
+      items:
+        type: "object"
+        anyOf:
+          - $ref: "#/components/schemas/getServicesResponseServiceArray"
+    getServicesResponseServiceArray:
+      type: object
+      properties:
+        Service:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 1
+            uuid:
+              type: string
+              example: "c36b8048-93ce-4385-ac19-ab5c90574b77"
+            servicename:
+              type: string
+              example: "Ping"
+            hostname:
+              type: string
+              example: "default host"
+            description:
+              type: string
+              example: ""
+            active_checks_enabled:
+              type: boolean
+              example: "true"
+            tags:
+              type: string
+              example: ""
+            host_id:
+              type: integer
+              format: "int64"
+              example: 1
+            allow_edit:
+              type: boolean
+              example: true
+            disabled:
+              type: boolean
+              example: false
+            has_graphs:
+              type: boolean
+              example: true
+        Host:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 1
+            uuid:
+              type: string
+              example: "c36b8048-93ce-4385-ac19-ab5c90574b77"
+            hostname:
+              type: string
+              example: "default host"
+            address:
+              type: string
+              example: "127.0.0.1"
+            description:
+              type: string
+              example: ""
+            active_checks_enabled:
+              type: boolean
+              example: ""
+            satelliteId:
+              type: integer
+              format: "int64"
+              example: 0
+            containerId:
+              type: integer
+              format: "int64"
+              example: 1
+            containerIds:
+              type: array
+              items:
+                type: integer
+              example:
+                - 1
+                - 2
+            tags:
+              type: string
+              example: ""
+            allow_edit:
+              type: boolean
+              example: true
+            disabled:
+              type: boolean
+              example: false
+            is_satellite_host:
+              type: boolean
+              example: false
+        Hoststatus:
+          type: object
+          properties:
+            currentState:
+              type: integer
+              format: "int64"
+              example: 1
+            isFlapping:
+              type: boolean
+              example: ""
+            problemHasBeenAcknowledged:
+              type: boolean
+              example: false
+            scheduledDowntimeDepth:
+              type: integer
+              format: "int64"
+              example: 0
+            lastCheck:
+              type: string
+              example: "15:09:00 - 04.04.2019"
+            nextCheck:
+              type: string
+              example: "17:09:00 - 04.04.2019"
+            activeChecksEnabled:
+              type: boolean
+              example: true
+            lastHardStateChange:
+              type: string
+              example: "15:39:16 - 25.03.2019"
+            last_state_change:
+              type: string
+              example: "15:39:16 - 25.03.2019"
+            output:
+              type: string
+              example: "OK - 127.0.0.1: rta 0.068ms, lost 0%"
+            long_output:
+              type: string
+              example: ""
+            acknowledgement_type:
+              type: integer
+              format: "int64"
+              example: 0
+            state_type:
+              type: integer
+              format: "int64"
+              example: 1
+            flap_detection_enabled:
+              type: boolean
+              example: ""
+            notifications_enabled:
+              type: boolean
+              example: ""
+            current_check_attempt:
+              type: integer
+              example: ""
+            max_check_attempts:
+              type: integer
+              example: ""
+            latency:
+              type: integer
+              example: ""
+            isHardstate:
+              type: boolean
+              example: true
+            isInMonitoring:
+              type: boolean
+              example: true
+            humanState:
+              type: string
+              example: "up"
+        Servicestatus:
+          type: object
+          properties:
+            currentState:
+              type: integer
+              format: "int64"
+              example: 1
+            isFlapping:
+              type: boolean
+              example: ""
+            problemHasBeenAcknowledged:
+              type: boolean
+              example: false
+            scheduledDowntimeDepth:
+              type: integer
+              format: "int64"
+              example: 0
+            lastCheck:
+              type: string
+              example: "15:09:00 - 04.04.2019"
+            nextCheck:
+              type: string
+              example: "17:09:00 - 04.04.2019"
+            activeChecksEnabled:
+              type: boolean
+              example: true
+            lastHardStateChange:
+              type: string
+              example: "15:39:16 - 25.03.2019"
+            last_state_change:
+              type: string
+              example: "15:39:16 - 25.03.2019"
+            processPerformanceData:
+              type: boolean
+              example: ""
+            state_type:
+              type: integer
+              format: "int64"
+              example: 1
+            acknowledgement_type:
+              type: integer
+              format: "int64"
+              example: 0
+            flap_detection_enabled:
+              type: boolean
+              example: ""
+            notifications_enabled:
+              type: boolean
+              example: ""
+            current_check_attempt:
+              type: integer
+              example: ""
+            output:
+              type: string
+              example: "OK - 127.0.0.1: rta 0.068ms, lost 0%"
+            long_output:
+              type: string
+              example: ""
+            perfdata:
+              type: string
+              example: ""
+            latency:
+              type: integer
+              example: ""
+            max_check_attempts:
+              type: integer
+              example: ""
+            isHardstate:
+              type: boolean
+              example: true
+            isInMonitoring:
+              type: boolean
+              example: true
+            humanState:
+              type: string
+              example: "ok"
