@@ -96,7 +96,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
         500:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
@@ -134,7 +134,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/idResponse'
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
         500:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
@@ -167,7 +167,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/successResponse'
+                $ref: 'http://localhost:81/globalschemas.yaml#/successResponse'
       security:
         - ApiKeyAuth: []
 
@@ -211,7 +211,7 @@ components:
         all_contactgroups:
           $ref: '#/components/schemas/getContactgroupsResponseContactgroupObject'
         scroll:
-          $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/Scroll'
+          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
     getContactgroupsResponseContactgroupObject:
       type: "array"
       items:

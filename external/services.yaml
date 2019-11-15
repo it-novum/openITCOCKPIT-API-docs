@@ -133,7 +133,7 @@ components:
         all_services:
           $ref: '#/components/schemas/getServicesResponseServiceObject'
         scroll:
-          $ref: 'http://ttriebensky-oitcweb.oitc.itn:81/globalschemas.yaml#/Scroll'
+          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
     getServicesResponseServiceObject:
       type: "array"
       items:

@@ -57,80 +57,80 @@ tags:
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462740'
 paths:
   /commands/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/index"
+    $ref: "http://localhost:81/commands.yaml#/requests/index"
   /commands/add.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/add"
+    $ref: "http://localhost:81/commands.yaml#/requests/add"
   /commands/edit/{commandId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/edit"
+    $ref: "http://localhost:81/commands.yaml#/requests/edit"
   /commands/delete/{commandId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/delete"
+    $ref: "http://localhost:81/commands.yaml#/requests/delete"
   /commands/copy/.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/commands.yaml#/requests/copy"
+    $ref: "http://localhost:81/commands.yaml#/requests/copy"
 
   /timeperiods/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/index"
+    $ref: "http://localhost:81/timeperiods.yaml#/requests/index"
   /timeperiods/add.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/add"
+    $ref: "http://localhost:81/timeperiods.yaml#/requests/add"
   /timeperiods/edit/{timeperiodId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/edit"
+    $ref: "http://localhost:81/timeperiods.yaml#/requests/edit"
   /timeperiods/delete/{timeperiodId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/delete"
+    $ref: "http://localhost:81/timeperiods.yaml#/requests/delete"
   /timeperiods/copy/.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/timeperiods.yaml#/requests/copy"
+    $ref: "http://localhost:81/timeperiods.yaml#/requests/copy"
 
   /contacts/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/index"
+    $ref: "http://localhost:81/contacts.yaml#/requests/index"
   /contacts/add.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/add"
+    $ref: "http://localhost:81/contacts.yaml#/requests/add"
   /contacts/edit/{contactId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/edit"
+    $ref: "http://localhost:81/contacts.yaml#/requests/edit"
   /contacts/delete/{contactId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/delete"
+    $ref: "http://localhost:81/contacts.yaml#/requests/delete"
   /contacts/copy/.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contacts.yaml#/requests/copy"
+    $ref: "http://localhost:81/contacts.yaml#/requests/copy"
 
   /contactgroups/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/index"
+    $ref: "http://localhost:81/contactgroups.yaml#/requests/index"
   /contactgroups/add.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/add"
+    $ref: "http://localhost:81/contactgroups.yaml#/requests/add"
   /contactgroups/edit/{contactgroupId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/edit"
+    $ref: "http://localhost:81/contactgroups.yaml#/requests/edit"
   /contactgroups/delete/{contactgroupId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/delete"
+    $ref: "http://localhost:81/contactgroups.yaml#/requests/delete"
   /contactgroups/copy/.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/contactgroups.yaml#/requests/copy"
+    $ref: "http://localhost:81/contactgroups.yaml#/requests/copy"
 
   /hosttemplates/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/index"
+    $ref: "http://localhost:81/hosttemplates.yaml#/requests/index"
   /hosttemplates/add.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/add"
+    $ref: "http://localhost:81/hosttemplates.yaml#/requests/add"
   /hosttemplates/edit/{hosttemplateId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/edit"
+    $ref: "http://localhost:81/hosttemplates.yaml#/requests/edit"
   /hosttemplates/delete/{hosttemplateId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/delete"
+    $ref: "http://localhost:81/hosttemplates.yaml#/requests/delete"
   /hosttemplates/copy/.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosttemplates.yaml#/requests/copy"
+    $ref: "http://localhost:81/hosttemplates.yaml#/requests/copy"
 
   /hosts/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/index"
+    $ref: "http://localhost:81/hosts.yaml#/requests/index"
   /hosts/add.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/add"
+    $ref: "http://localhost:81/hosts.yaml#/requests/add"
   /hosts/edit/{hostId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/edit"
+    $ref: "http://localhost:81/hosts.yaml#/requests/edit"
   /hosts/delete/{hostId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/hosts.yaml#/requests/delete"
+    $ref: "http://localhost:81/hosts.yaml#/requests/delete"
 
   /servicetemplates/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/index"
+    $ref: "http://localhost:81/servicetemplates.yaml#/requests/index"
   /servicetemplates/add.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/add"
+    $ref: "http://localhost:81/servicetemplates.yaml#/requests/add"
   /servicetemplates/edit/{servicetemplateId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/edit"
+    $ref: "http://localhost:81/servicetemplates.yaml#/requests/edit"
   /servicetemplates/delete/{servicetemplateId}.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/servicetemplates.yaml#/requests/delete"
+    $ref: "http://localhost:81/servicetemplates.yaml#/requests/delete"
 
   /services/index.json:
-    $ref: "http://ttriebensky-oitcweb.oitc.itn:81/services.yaml#/requests/index"
+    $ref: "http://localhost:81/services.yaml#/requests/index"
 
 
 components:
