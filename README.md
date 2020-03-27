@@ -45,7 +45,7 @@ docker run --rm -v /home/timo/itc/openITCOCKPIT-API-docs/external:/usr/share/ngi
 2. Start swagger-ui:
 
 ```
-docker run -p 82:8080 -e BASE_URL=/swagger-ui -e SWAGGER_JSON=/configs/index.json -v /path/to/repository:/configs swaggerapi/swagger-ui
+docker run -p 82:8080 -e BASE_URL=/swagger-ui -e SWAGGER_JSON=/configs/index.yaml -v /path/to/repository:/configs -d swaggerapi/swagger-ui
 ```
 
 

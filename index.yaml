@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: openITCOCKPIT API
-  description: 'This is a openITCOCKPIT API description (alpha).<br>You can find out more about openITCOCKPIT at [https://openitcockpit.io](https://openitcockpit.io) or use our community IRC Channel at [irc.freenode.net, #openitcockpit](https://kiwiirc.com/nextclient/irc.freenode.net/#openitcockpit).<br><br>For this api sample, you can use the api key `b982bb115085a9ade370a56cfd884f536b38de809cef5b105933af1f1a584dc8b2eef3fba4c04794d384a68bffe123ef33d5c9298f40403534fb014681dc6946732d762ccfa324326b320422d4ca5088` to authorize yourself.'
+  description: 'This is a openITCOCKPIT API description (alpha).<br>You can find out more about openITCOCKPIT at [https://openitcockpit.io](https://openitcockpit.io) or use our community IRC Channel at [irc.freenode.net, #openitcockpit](https://kiwiirc.com/nextclient/irc.freenode.net/#openitcockpit).<br><br>For this api sample, you can use the api key `bcc965e7e782d0ce1d86c5c9dfae7aebbd3587e2f90f7e641e795da7f06706e6904d57de3bd600c9b20627737069fc38c4ffd760f777f877f9b7df050029d3ca1df681d807bec276302235fd7193717b` to authorize yourself.'
   contact:
     email: development@openitcockpit.io
   license:
@@ -12,7 +12,7 @@ externalDocs:
   description: Complete technical documentation
   url: 'https://docs.it-novum.com/display/ODE'
 servers:
-  - url: 'https://dev-ttriebensky.oitc.itn'
+  - url: 'https://ttriebensky.oitc.itn'
   - url: 'https://demo.openitcockpit.io'
 tags:
   - name: Commands
@@ -131,6 +131,8 @@ paths:
 
   /services/index.json:
     $ref: "http://localhost:81/services.yaml#/requests/index"
+  /services/add.json:
+    $ref: "http://localhost:81/services.yaml#/requests/add"
 
 
 components:
