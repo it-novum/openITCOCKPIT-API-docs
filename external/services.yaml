@@ -154,6 +154,44 @@ requests:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
         - ApiKeyAuth: []
+  edit:
+    post:
+      tags:
+        - Services
+      summary: "Edit a service"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postServicesEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: serviceId
+          in: path
+          description: ID of the service to edit
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
 
 components:
   schemas:
@@ -673,6 +711,304 @@ components:
         commandargument:
           type: object
           properties:
+            name:
+              type: string
+              example: $ARG2$
+            human_name:
+              type: string
+              example: Critical
+            command_id:
+              type: integer
+              example: 3
+
+    postServicesEditRequest:
+      type: "object"
+      required:
+        - "Service"
+      properties:
+        Service:
+          $ref: "#/components/schemas/postServicesEditRequestService"
+    postServicesEditRequestService:
+      type: "object"
+      properties:
+        id:
+          type: integer
+          format: "int64"
+          example: 1
+        uuid:
+          type: string
+          example: "3eb9db30-c9cf-4c25-9c69-0c3c01dc2256"
+        servicetemplate_id:
+          type: integer
+          format: "int64"
+          example: 1
+        host_id:
+          type: integer
+          format: "int64"
+          example: 1
+        name:
+          type: string
+          example: "Example Ping"
+        description:
+          type: string
+          example: "Lan-Ping (edited)"
+        command_id:
+          type: integer
+          format: "int64"
+          example: 3
+        eventhandler_command_id:
+          type: integer
+          format: "int64"
+          example: 0
+        check_interval:
+          type: integer
+          format: "int64"
+          example: 300
+        retry_interval:
+          type: integer
+          format: "int64"
+          example: 60
+        max_check_attempts:
+          type: integer
+          format: "int64"
+          example: 3
+        first_notification_delay:
+          type: integer
+          format: "int64"
+          example: 0
+        notification_interval:
+          type: integer
+          format: "int64"
+          example: 7200
+        notify_on_recovery:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_warning:
+          type: integer
+          format: "int64"
+          example: 0
+        notify_on_critical:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_on_unknown:
+          type: integer
+          format: "int64"
+          example: 0
+        notify_on_flapping:
+          type: integer
+          format: "int64"
+          example: 0
+        notify_on_downtime:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_ok:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_warning:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_critical:
+          type: integer
+          format: "int64"
+          example: 0
+        flap_detection_on_unknown:
+          type: integer
+          format: "int64"
+          example: 0
+        low_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        high_flap_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        process_performance_data:
+          type: integer
+          format: "int64"
+          example: 1
+        freshness_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        freshness_threshold:
+          type: integer
+          format: "int64"
+          example: 0
+        passive_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        event_handler_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        active_checks_enabled:
+          type: integer
+          format: "int64"
+          example: 1
+        retain_status_information:
+          type: integer
+          format: "int64"
+          example: 0
+        retain_nonstatus_information:
+          type: integer
+          format: "int64"
+          example: 0
+        notifications_enabled:
+          type: integer
+          format: "int64"
+          example: 0
+        notes:
+          type: string
+          example: "custom note"
+        priority:
+          type: integer
+          format: "int64"
+          minimum: 1
+          maximum: 5
+          example: 1
+        check_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        notify_period_id:
+          type: integer
+          format: "int64"
+          example: 1
+        tags:
+          type: string
+          example: "example,api"
+        container_id:
+          type: integer
+          format: "int64"
+          example: 0
+        service_url:
+          type: string
+          example: "https://test.example.org?host=$HOSTNAME$&service=$SERVICENAME$"
+        is_volatile:
+          type: integer
+          format: "int64"
+          example: 0
+        contacts:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        contactgroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 2
+        servicegroups:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 2
+        customvariables:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postServicesEditRequestServiceCustomvariables"
+        servicecommandargumentvalues:
+          type: array
+          items:
+            type: object
+            anyOf:
+              - $ref: "#/components/schemas/postServicesEditRequestServiceCommandargumentvalues1"
+              - $ref: "#/components/schemas/postServicesEditRequestServiceCommandargumentvalues2"
+        serviceeventcommandargumentvalues:
+          type: array
+          items: {}
+
+    postServicesEditRequestServiceCustomvariables:
+      type: "object"
+      required:
+        - objecttype_id
+        - name
+        - value
+      properties:
+        objecttype_id:
+          type: integer
+          example: 256
+        name:
+          type: string
+          example: "TEST"
+        value:
+          type: string
+          example: "examplevalue"
+    postServicesEditRequestServiceCommandargumentvalues1:
+      type: "object"
+      required:
+        - commandargument_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 1
+        commandargument_id:
+          type: integer
+          example: 1
+        value:
+          type: string
+          example: "100.0,20%"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: $ARG1$
+            human_name:
+              type: string
+              example: Warning
+            command_id:
+              type: integer
+              example: 3
+    postServicesEditRequestServiceCommandargumentvalues2:
+      type: "object"
+      required:
+        - commandargument_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 2
+        commandargument_id:
+          type: integer
+          example: 2
+        value:
+          type: string
+          example: "500.0,60%"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 2
             name:
               type: string
               example: $ARG2$
