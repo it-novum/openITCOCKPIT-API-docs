@@ -1,0 +1,182 @@
+requests:
+  index:
+    get:
+      tags:
+        - Users
+      summary: Find users
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: asc
+            items:
+              default: asc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use scroll instead of paging
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+            example: ""
+          example: full_name
+        - name: filter[full_name]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by user name
+        - name: filter[Users.company]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by users company name
+        - name: filter[Users.email]
+          in: query
+          schema:
+            type: string
+          description: Filter by user email
+        - name: filter[Users.phone]
+          in: query
+          schema:
+            type: string
+          description: Filter by user phone number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserResponse'
+      security:
+        - ApiKeyAuth: []
+
+
+components:
+  schemas:
+    getUserResponse:
+      type: object
+      properties:
+        all_users:
+          $ref: '#/components/schemas/getUsersResponseUserObject'
+        scroll:
+          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
+    getUsersResponseUserObject:
+      type: "array"
+      items:
+        type: "object"
+        anyOf:
+          - $ref: "#/components/schemas/getUsersResponseUserArray"
+    getUsersResponseUserArray:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: "int64"
+          example: 1
+        email:
+          type: string
+          example: "admin@example.com"
+        company:
+          type: string
+          example: null
+        phone:
+          type: string
+          example: null
+        is_active:
+          type: boolean
+          example: "true"
+        samaccountname:
+          type: string
+          example: null
+        full_name:
+          type: string
+          example: "Max Musteradmin"
+        allow_edit:
+          type: boolean
+          example: true
+        usercontainerroles:
+          type: array
+          items: {}
+        containers:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/getUsersResponseUserArrayContainers"
+        usergroup:
+          type: object
+          required:
+            - id
+            - name
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 1
+            name:
+              type: string
+              example: "Administrator"
+
+    getUsersResponseUserArrayContainers:
+      type: object
+      required:
+        - id
+        - containertype_id
+        - name
+        - parent_id
+        - lft
+        - rght
+      properties:
+        id:
+          type: integer
+          format: "int64"
+          example: 1
+        containertype_id:
+          type: integer
+          format: "int64"
+          example: 1
+        name:
+          type: string
+          example: "root"
+        parent_id:
+          type: integer
+          format: "int64"
+          example: null
+        lft:
+          type: integer
+          format: "int64"
+          example: 1
+        rght:
+          type: integer
+          format: "int64"
+          example: 16

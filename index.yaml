@@ -133,7 +133,14 @@ paths:
     $ref: "http://localhost:81/services.yaml#/requests/index"
   /services/add.json:
     $ref: "http://localhost:81/services.yaml#/requests/add"
+  /services/edit/{serviceId}.json:
+    $ref: "http://localhost:81/services.yaml#/requests/edit"
+  /services/delete/{serviceId}.json:
+    $ref: "http://localhost:81/services.yaml#/requests/delete"
 
+  /users/index.json:
+    $ref: "http://localhost:81/users.yaml#/requests/index"
+  
 
 components:
   securitySchemes:
