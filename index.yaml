@@ -159,7 +159,8 @@ paths:
 
   /hostgroups/index.json:
     $ref: "http://localhost:81/hostgroups.yaml#/requests/index"
-  
+  /hostgroups/add.json:
+    $ref: "http://localhost:81/hostgroups.yaml#/requests/add"
 
 
 components:
