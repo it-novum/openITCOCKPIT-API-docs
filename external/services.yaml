@@ -682,6 +682,9 @@ components:
             anyOf:
               - $ref: "#/components/schemas/postServicesRequestServiceCommandargumentvalues1"
               - $ref: "#/components/schemas/postServicesRequestServiceCommandargumentvalues2"
+        serviceeventcommandargumentvalues:
+          type: array
+          items: {}
 
     postServicesRequestServiceCustomvariables:
       type: "object"

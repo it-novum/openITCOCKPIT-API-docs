@@ -140,7 +140,9 @@ paths:
 
   /users/index.json:
     $ref: "http://localhost:81/users.yaml#/requests/index"
-  
+  /users/add.json:
+    $ref: "http://localhost:81/users.yaml#/requests/add"
+
 
 components:
   securitySchemes:

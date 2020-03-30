@@ -79,7 +79,39 @@ requests:
                 $ref: '#/components/schemas/getUserResponse'
       security:
         - ApiKeyAuth: []
-
+  add:
+    post:
+      tags:
+        - Users
+      summary: "Add a new user"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postUserRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+        400:
+          description: "Be sure all required fields are submitted. Possible error: the email has to be unique."
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
 
 components:
   schemas:
@@ -180,3 +212,88 @@ components:
           type: integer
           format: "int64"
           example: 16
+
+    postUserRequest:
+      type: "object"
+      required:
+        - "User"
+      properties:
+        User:
+          $ref: "#/components/schemas/postUserRequestUser"
+    postUserRequestUser:
+      type: "object"
+      required:
+        - "name"
+        - "containers"
+        - "email"
+      properties:
+        firstname:
+          type: "string"
+          example: "Max"
+        lastname:
+          type: "string"
+          example: "Mustermann"
+        email:
+          type: "string"
+          description: "has to be unique"
+          example: "example@example.com"
+        phone:
+          type: "string"
+          example: "0000-00000000"
+        is_active:
+          type: "integer"
+          format: "int64"
+          example: 1
+        showstatsinmenu:
+          type: "integer"
+          format: "int64"
+          example: 1
+        paginatorlength:
+          type: "integer"
+          format: "int64"
+          example: 25
+        dashboard_tab_rotation:
+          type: "integer"
+          format: "int64"
+          example: 0
+        recursive_browser:
+          type: "integer"
+          format: "int64"
+          example: 1
+        dateformat:
+          type: "string"
+          example: "H:i:s - d.m.Y"
+        timezone:
+          type: "string"
+          example: "Europe/Berlin"
+        i18n:
+          type: "string"
+          description: "available frontend translations: en_US, de_DE, fr_FR"
+          example: "en_US"
+        password:
+          type: "string"
+          example: "asdf12"
+        confirm_password:
+          type: "string"
+          example: "asdf12"
+        company:
+          type: "string"
+          example: "it-novum"
+        usergroup_id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        usercontainerroles:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        ContainersUsersMemberships:
+          type: object
+          properties:
+            1:
+              type: string
+              example: "2"
