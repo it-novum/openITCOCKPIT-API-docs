@@ -1,0 +1,139 @@
+requests:
+  index:
+    get:
+      tags:
+        - Host groups
+      summary: Find host groups
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: asc
+            items:
+              default: asc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use scroll instead of paging
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+            example: ""
+          example: Containers.name
+        - name: filter[Containers.name]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by host group name
+        - name: filter[Hostgroups.description]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by host group description
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getHostgroupResponse'
+      security:
+        - ApiKeyAuth: []
+
+
+
+components:
+  schemas:
+    getHostgroupResponse:
+      type: object
+      properties:
+        all_hostgroups:
+          $ref: '#/components/schemas/getHostgroupsResponseHostgroupObject'
+        scroll:
+          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
+    getHostgroupsResponseHostgroupObject:
+      type: "array"
+      items:
+        type: "object"
+        anyOf:
+          - $ref: "#/components/schemas/getHostgroupsResponseHostgroupArray"
+    getHostgroupsResponseHostgroupArray:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: "int64"
+          example: 2
+        uuid:
+          type: string
+          example: "c656cc25-5b53-4712-8d8f-37dcefe05852"
+        container_id:
+          type: integer
+          format: "int64"
+          example: 10
+        description:
+          type: string
+          example: "exmple text"
+        hostgroup_url:
+          type: string
+          example: "https://example.org"
+        allowEdit:
+          type: boolean
+          example: "true"
+        Containers:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 10
+            containertype_id:
+              type: integer
+              format: "int64"
+              example: 7
+            name:
+              type: string
+              example: "example name"
+            parent_id:
+              type: integer
+              format: "int64"
+              example: 2
+            lft:
+              type: integer
+              format: "int64"
+              example: 5
+            rght:
+              type: integer
+              format: "int64"
+              example: 6
+

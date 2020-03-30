@@ -40,6 +40,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462734'
+  - name: Host groups
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462730'
   - name: Hosts
     description: Basic Monitoring
     externalDocs:
@@ -151,6 +156,10 @@ paths:
     $ref: "http://localhost:81/users.yaml#/requests/edit"
   /users/delete/{userId}.json:
     $ref: "http://localhost:81/users.yaml#/requests/delete"
+
+  /hostgroups/index.json:
+    $ref: "http://localhost:81/hostgroups.yaml#/requests/index"
+  
 
 
 components:
