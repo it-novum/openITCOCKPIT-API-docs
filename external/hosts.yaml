@@ -167,7 +167,7 @@ requests:
     post:
       tags:
         - Hosts
-      summary: "Add a new host"
+      summary: "Edit a host"
       description: ""
       requestBody:
         required: true

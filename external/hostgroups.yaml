@@ -100,6 +100,73 @@ requests:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
         - ApiKeyAuth: []
+  edit:
+    post:
+      tags:
+        - Host groups
+      summary: "Edit a host group"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postHostgroupsEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostgroupId
+          in: path
+          description: ID of the hostgroup to edit
+          required: true
+          schema:
+            type: integer
+          example: 3
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+  delete:
+    post:
+      tags:
+        - Host groups
+      summary: "Delete a host group"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostgroupId
+          in: path
+          description: ID of the host group to delete
+          required: true
+          schema:
+            type: integer
+          example: 4
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/successResponse'
+      security:
+        - ApiKeyAuth: []
 
 
 components:
@@ -197,6 +264,77 @@ components:
             name:
               type: string
               example: "Example group"
+        hosts:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        hosttemplates:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+    postHostgroupsEditRequest:
+      type: "object"
+      required:
+        - "Hostgroup"
+      properties:
+        Hostgroup:
+          $ref: "#/components/schemas/postHostgroupsEditRequestHostgroup"
+    postHostgroupsEditRequestHostgroup:
+      type: "object"
+      required:
+        - "container"
+      properties:
+        id:
+          type: integer
+          example: 4
+        uuid:
+          type: "string"
+          example: "7e487278-3fcf-44f6-bb0b-9f17ee224f1f"
+        container_id:
+          type: integer
+          example: 17
+        description:
+          type: "string"
+          example: "Example description"
+        hostgroup_url:
+          type: "string"
+          example: "https://example.com"
+        container:
+          type: object
+          required:
+            - "parent_id"
+            - "name"
+            - "id"
+          properties:
+            id:
+              type: integer
+              example: 17
+            containertype_id:
+              type: integer
+              example: 7
+            parent_id:
+              type: integer
+              format: "int64"
+              example: 1
+            name:
+              type: string
+              example: "Example group"
+            lft:
+              type: integer
+              format: "int64"
+              example: 16
+            rght:
+              type: integer
+              format: "int64"
+              example: 17
         hosts:
           type: object
           properties:

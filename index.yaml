@@ -161,6 +161,10 @@ paths:
     $ref: "http://localhost:81/hostgroups.yaml#/requests/index"
   /hostgroups/add.json:
     $ref: "http://localhost:81/hostgroups.yaml#/requests/add"
+  /hostgroups/edit/{hostgroupId}.json:
+    $ref: "http://localhost:81/hostgroups.yaml#/requests/edit"
+  /hostgroups/delete/{hostgroupId}.json:
+    $ref: "http://localhost:81/hostgroups.yaml#/requests/delete"
 
 
 components:
