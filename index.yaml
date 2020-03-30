@@ -55,6 +55,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462740'
+  - name: Users
+    description: User Management
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462746'
 paths:
   /commands/index.json:
     $ref: "http://localhost:81/commands.yaml#/requests/index"
@@ -142,6 +147,10 @@ paths:
     $ref: "http://localhost:81/users.yaml#/requests/index"
   /users/add.json:
     $ref: "http://localhost:81/users.yaml#/requests/add"
+  /users/edit/{userId}.json:
+    $ref: "http://localhost:81/users.yaml#/requests/edit"
+  /users/delete/{userId}.json:
+    $ref: "http://localhost:81/users.yaml#/requests/delete"
 
 
 components:

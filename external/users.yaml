@@ -112,6 +112,73 @@ requests:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
         - ApiKeyAuth: []
+  edit:
+    post:
+      tags:
+        - Users
+      summary: "Edit a user"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postUserEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: userId
+          in: path
+          description: ID of the user to edit
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/postUserEditResponse"
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+  delete:
+    post:
+      tags:
+        - Users
+      summary: "Delete a user"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: userId
+          in: path
+          description: ID of the user to delete
+          required: true
+          schema:
+            type: integer
+          example: 3
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/successResponse'
+      security:
+        - ApiKeyAuth: []
 
 components:
   schemas:
@@ -223,9 +290,15 @@ components:
     postUserRequestUser:
       type: "object"
       required:
-        - "name"
-        - "containers"
+        - "firstname"
+        - "lastname"
         - "email"
+        - "dateformat"
+        - "timezone"
+        - "i18n"
+        - "password"
+        - "confirm_password"
+        - "ContainersUsersMemberships"
       properties:
         firstname:
           type: "string"
@@ -279,6 +352,9 @@ components:
         company:
           type: "string"
           example: "it-novum"
+        position:
+          type: "string"
+          example: null
         usergroup_id:
           type: "integer"
           format: "int64"
@@ -297,3 +373,243 @@ components:
             1:
               type: string
               example: "2"
+
+    postUserEditRequest:
+      type: "object"
+      required:
+        - "User"
+      properties:
+        User:
+          $ref: "#/components/schemas/postUserEditRequestUser"
+    postUserEditRequestUser:
+      type: "object"
+      required:
+        - "id"
+        - "firstname"
+        - "lastname"
+        - "email"
+        - "dateformat"
+        - "timezone"
+        - "i18n"
+        - "password"
+        - "confirm_password"
+        - "ContainersUsersMemberships"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 3
+        usergroup_id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        firstname:
+          type: "string"
+          example: "Max"
+        lastname:
+          type: "string"
+          example: "Mustermann (edited)"
+        email:
+          type: "string"
+          example: "example@example.com"
+        phone:
+          type: "string"
+          example: "0000-00000000"
+        is_active:
+          type: "integer"
+          format: "int64"
+          example: 1
+        showstatsinmenu:
+          type: "integer"
+          format: "int64"
+          example: 1
+        paginatorlength:
+          type: "integer"
+          format: "int64"
+          example: 25
+        dashboard_tab_rotation:
+          type: "integer"
+          format: "int64"
+          example: 0
+        recursive_browser:
+          type: "integer"
+          format: "int64"
+          example: 1
+        dateformat:
+          type: "string"
+          example: "H:i:s - d.m.Y"
+        timezone:
+          type: "string"
+          example: "Europe/Berlin"
+        i18n:
+          type: "string"
+          description: "available frontend translations: en_US, de_DE, fr_FR"
+          example: "en_US"
+        password:
+          type: "string"
+          example: ""
+        confirm_password:
+          type: "string"
+          example: ""
+        company:
+          type: "string"
+          example: "it-novum"
+        position:
+          type: "string"
+          example: null
+        usercontainerroles:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        usercontainerroles_containerids:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 3
+        ContainersUsersMemberships:
+          type: object
+          properties:
+            1:
+              type: string
+              example: "2"
+
+    postUserEditResponse:
+      type: "object"
+      properties:
+        user:
+          $ref: "#/components/schemas/postUserEditResponseUser"
+    postUserEditResponseUser:
+      type: "object"
+      required:
+        - "id"
+        - "firstname"
+        - "lastname"
+        - "email"
+        - "dateformat"
+        - "timezone"
+        - "i18n"
+        - "password"
+        - "confirm_password"
+        - "ContainersUsersMemberships"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 3
+        usergroup_id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        firstname:
+          type: "string"
+          example: "Max"
+        lastname:
+          type: "string"
+          example: "Mustermann (edited)"
+        email:
+          type: "string"
+          example: "example@example.com"
+        phone:
+          type: "string"
+          example: "0000-00000000"
+        is_active:
+          type: "string"
+          example: "true"
+        showstatsinmenu:
+          type: "string"
+          example: "true"
+        paginatorlength:
+          type: "integer"
+          format: "int64"
+          example: 25
+        dashboard_tab_rotation:
+          type: "integer"
+          format: "int64"
+          example: 0
+        recursive_browser:
+          type: "string"
+          example: "true"
+        dateformat:
+          type: "string"
+          example: "H:i:s - d.m.Y"
+        timezone:
+          type: "string"
+          example: "Europe/Berlin"
+        i18n:
+          type: "string"
+          description: "available frontend translations: en_US, de_DE, fr_FR"
+          example: "en_US"
+        image:
+          type: "string"
+          example: null
+        onetimetoken:
+          type: "string"
+          example: null
+        samaccountname:
+          type: "string"
+          example: null
+        ldap_dn:
+          type: "string"
+          example: null
+        password:
+          type: "string"
+          example: ""
+        confirm_password:
+          type: "string"
+          example: ""
+        company:
+          type: "string"
+          example: "it-novum"
+        position:
+          type: "string"
+          example: null
+        usercontainerroles:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postUserEditResponseUserUsercontainerroles"
+        containers:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/postUserEditResponseUserContainers"
+    postUserEditResponseUserUsercontainerroles:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Tester"
+    postUserEditResponseUserContainers:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        containertype_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "root"
+        parent_id:
+          type: integer
+          example: null
+        lft:
+          type: integer
+          example: 1
+        rght:
+          type: integer
+          example: 16
+
