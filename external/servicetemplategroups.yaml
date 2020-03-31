@@ -1,0 +1,339 @@
+requests:
+  index:
+    get:
+      tags:
+        - Service template groups
+      summary: Find service template groups
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: direction
+          in: query
+          description: Use direction to sort the response
+          required: false
+          schema:
+            type: string
+            default: asc
+            items:
+              default: asc
+              enum:
+                - asc
+                - desc
+        - name: scroll
+          in: query
+          description: Use scroll instead of paging
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Get page (number) of search results
+          required: true
+          style: form
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: The field according to which is sorted in the specified direction
+          schema:
+            type: string
+            example: ""
+          example: Containers.name
+        - name: filter[Containers.name]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by service template group name
+        - name: filter[Servicetemplategroups.description]
+          in: query
+          schema:
+            type: string
+            example: ""
+          description: Filter by service template group description
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getServicetemplategroupResponse'
+      security:
+        - ApiKeyAuth: []
+  add:
+    post:
+      tags:
+        - Service template groups
+      summary: "Add a new service template group"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postServicetemplategroupsRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+  edit:
+    post:
+      tags:
+        - Service template groups
+      summary: "Edit a service template group"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postServicetemplategroupsEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: servicetemplategroupId
+          in: path
+          description: ID of the service template group to edit
+          required: true
+          schema:
+            type: integer
+          example: 4
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+  delete:
+    post:
+      tags:
+        - Service template groups
+      summary: "Delete a service template group"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: servicetemplategroupId
+          in: path
+          description: ID of the service template group to delete
+          required: true
+          schema:
+            type: integer
+          example: 4
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/successResponse'
+      security:
+        - ApiKeyAuth: []
+
+
+components:
+  schemas:
+    getServicetemplategroupResponse:
+      type: object
+      properties:
+        all_servicetemplategroups:
+          $ref: '#/components/schemas/getServicetemplategroupsResponseServicetemplategroupObject'
+        scroll:
+          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
+    getServicetemplategroupsResponseServicetemplategroupObject:
+      type: "array"
+      items:
+        type: "object"
+        anyOf:
+          - $ref: "#/components/schemas/getServicetemplategroupsResponseServicetemplategroupArray"
+    getServicetemplategroupsResponseServicetemplategroupArray:
+      type: object
+      properties:
+        Servicetemplategroup:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 2
+            uuid:
+              type: string
+              example: "593db914-b2e9-42e0-a4e1-dd411ce58b23"
+            container_id:
+              type: integer
+              format: "int64"
+              example: 13
+            description:
+              type: string
+              example: "exmple text"
+            servicegroup_url:
+              type: string
+              example: "https://example.org"
+            allowEdit:
+              type: boolean
+              example: "true"
+            container:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: "int64"
+                  example: 13
+                containertype_id:
+                  type: integer
+                  format: "int64"
+                  example: 9
+                name:
+                  type: string
+                  example: "example name"
+                parent_id:
+                  type: integer
+                  format: "int64"
+                  example: 2
+                lft:
+                  type: integer
+                  format: "int64"
+                  example: 14
+                rght:
+                  type: integer
+                  format: "int64"
+                  example: 15
+    postServicetemplategroupsRequest:
+      type: "object"
+      required:
+        - "Servicetemplategroup"
+      properties:
+        Servicetemplategroup:
+          $ref: "#/components/schemas/postServicetemplategroupsRequestServicetemplategroup"
+    postServicetemplategroupsRequestServicetemplategroup:
+      type: "object"
+      required:
+        - "container"
+      properties:
+        description:
+          type: "string"
+          example: "Example description"
+        container:
+          type: object
+          required:
+            - "parent_id"
+            - "name"
+          properties:
+            parent_id:
+              type: integer
+              format: "int64"
+              example: 1
+            name:
+              type: string
+              example: "Example group"
+        servicetemplates:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+    postServicetemplategroupsEditRequest:
+      type: "object"
+      required:
+        - "Servicetemplategroup"
+      properties:
+        Servicetemplategroup:
+          $ref: "#/components/schemas/postServicetemplategroupsEditRequestServicetemplategroup"
+    postServicetemplategroupsEditRequestServicetemplategroup:
+      type: "object"
+      required:
+        - "id"
+        - "uuid"
+        - "container_id"
+        - "container"
+        - "servicetemplates"
+      properties:
+        id:
+          type: integer
+          example: 4
+        uuid:
+          type: "string"
+          example: "6bae032f-84bd-4ae3-9183-610e8676f7ba"
+        container_id:
+          type: integer
+          example: 24
+        description:
+          type: "string"
+          example: "Example description"
+        container:
+          type: object
+          required:
+            - "parent_id"
+            - "name"
+          properties:
+            id:
+              type: integer
+              format: "int64"
+              example: 24
+            containertype_id:
+              type: integer
+              format: "int64"
+              example: 9
+            parent_id:
+              type: integer
+              format: "int64"
+              example: 1
+            name:
+              type: string
+              example: "Example group"
+            lft:
+              type: integer
+              format: "int64"
+              example: 26
+            rght:
+              type: integer
+              format: "int64"
+              example: 27
+        servicetemplates:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1

@@ -60,6 +60,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462736'
+  - name: Service template groups
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462742'
   - name: Services
     description: Basic Monitoring
     externalDocs:
@@ -179,6 +184,15 @@ paths:
     $ref: "http://localhost:81/servicegroups.yaml#/requests/edit"
   /servicegroups/delete/{servicegroupId}.json:
     $ref: "http://localhost:81/servicegroups.yaml#/requests/delete"
+
+  /servicetemplategroups/index.json:
+    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/index"
+  /servicetemplategroups/add.json:
+    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/add"
+  /servicetemplategroups/edit/{servicetemplategroupId}.json:
+    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/edit"
+  /servicetemplategroups/delete/{servicetemplategroupId}.json:
+    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/delete"
 
 
 components:
