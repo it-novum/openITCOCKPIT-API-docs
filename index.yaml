@@ -175,6 +175,8 @@ paths:
     $ref: "http://localhost:81/servicegroups.yaml#/requests/index"
   /servicegroups/add.json:
     $ref: "http://localhost:81/servicegroups.yaml#/requests/add"
+  /servicegroups/edit/{servicegroupId}.json:
+    $ref: "http://localhost:81/servicegroups.yaml#/requests/edit"
 
 
 components:

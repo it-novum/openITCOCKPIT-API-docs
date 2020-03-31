@@ -100,6 +100,45 @@ requests:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
         - ApiKeyAuth: []
+  edit:
+    post:
+      tags:
+        - Service groups
+      summary: "Edit a service group"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postServicegroupsEditRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: servicegroupId
+          in: path
+          description: ID of the servicegroup to edit
+          required: true
+          schema:
+            type: integer
+          example: 4
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
+
 
 components:
   schemas:
@@ -180,7 +219,7 @@ components:
         description:
           type: "string"
           example: "Example description"
-        hostgroup_url:
+        servicegroup_url:
           type: "string"
           example: "https://example.com"
         container:
@@ -212,4 +251,59 @@ components:
               items:
                 type: integer
                 example: 1
-    
+    postServicegroupsEditRequest:
+      type: "object"
+      required:
+        - "Servicegroup"
+      properties:
+        Servicegroup:
+          $ref: "#/components/schemas/postServicegroupsEditRequestServicegroup"
+    postServicegroupsEditRequestServicegroup:
+      type: "object"
+      required:
+        - "container"
+      properties:
+        id:
+          type: integer
+          example: 4
+        uuid:
+          type: "string"
+          example: "7e487278-3fcf-44f6-bb0b-9f17ee224f1f"
+        container_id:
+          type: integer
+          example: 17
+        description:
+          type: "string"
+          example: "Example description"
+        servicegroup_url:
+          type: "string"
+          example: "https://example.com"
+        container:
+          type: object
+          required:
+            - "parent_id"
+            - "name"
+          properties:
+            parent_id:
+              type: integer
+              format: "int64"
+              example: 1
+            name:
+              type: string
+              example: "Example group"
+        services:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        servicetemplates:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
