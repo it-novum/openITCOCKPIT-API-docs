@@ -14,7 +14,7 @@ https://inspector.swagger.io
 
 
 
-### Docker commands
+### Initial setup
 
 Replace "/path/to/repository" with the real repository path in your system!
 
@@ -24,20 +24,14 @@ Make sure, that the ports 80, 81, 82 are not used yet!
 #### Start swagger-editor (required for developing) at http://localhost:80
 
 ```
-docker run -d -p 80:8080 swaggerapi/swagger-editor
+docker run -d -p 80:8080 --name swagger-editor swaggerapi/swagger-editor
 ```
 
 #### Start webserver over project repository (required for developing) at http://localhost:81
 
 ```
-docker run --rm -v /path/to/repository/external:/usr/share/nginx/html:ro -v /path/to/repository/nginx-example.conf:/etc/nginx/conf.d/default.conf:ro -d -p 81:80 nginx
+docker run -v /path/to/repository/external:/usr/share/nginx/html:ro -v /path/to/repository/nginx-example.conf:/etc/nginx/conf.d/default.conf:ro -d -p 81:80 --name swagger-proxy nginx
 ```
-Example:
-
-```
-docker run --rm -v /home/timo/itc/openITCOCKPIT-API-docs/external:/usr/share/nginx/html:ro -v /home/timo/itc/openITCOCKPIT-API-docs/nginx-example.conf:/etc/nginx/conf.d/default.conf:ro -d -p 81:80 nginx
-```
-
 
 #### Start swagger-ui at http://localhost:82/swagger-ui to see the result
 
@@ -45,9 +39,23 @@ docker run --rm -v /home/timo/itc/openITCOCKPIT-API-docs/external:/usr/share/ngi
 2. Start swagger-ui:
 
 ```
-docker run -p 82:8080 -e BASE_URL=/swagger-ui -e SWAGGER_JSON=/configs/index.yaml -v /path/to/repository:/configs -d swaggerapi/swagger-ui
+docker run -p 82:8080 -e BASE_URL=/swagger-ui -e SWAGGER_JSON=/configs/index.yaml -v /path/to/repository:/configs -d --name swagger-ui swaggerapi/swagger-ui
 ```
 
+### Start setup
+```
+docker start swagger-editor swagger-proxy swagger-ui
+```
+
+### Stop setup
+```
+docker stop swagger-editor swagger-proxy swagger-ui
+```
+
+### Remove setup
+```
+docker rm swagger-editor swagger-proxy swagger-ui
+```
 
 
 ### Developing process (hints)
