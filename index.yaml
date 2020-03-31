@@ -173,7 +173,9 @@ paths:
 
   /servicegroups/index.json:
     $ref: "http://localhost:81/servicegroups.yaml#/requests/index"
-  
+  /servicegroups/add.json:
+    $ref: "http://localhost:81/servicegroups.yaml#/requests/add"
+
 
 components:
   securitySchemes:

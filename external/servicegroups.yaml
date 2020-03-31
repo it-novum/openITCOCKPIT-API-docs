@@ -69,7 +69,37 @@ requests:
                 $ref: '#/components/schemas/getServicegroupResponse'
       security:
         - ApiKeyAuth: []
-
+  add:
+    post:
+      tags:
+        - Service groups
+      summary: "Add a new service group"
+      description: ""
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postServicegroupsRequest'
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: []
 
 components:
   schemas:
@@ -135,3 +165,51 @@ components:
               type: integer
               format: "int64"
               example: 8
+    postServicegroupsRequest:
+      type: "object"
+      required:
+        - "Servicegroup"
+      properties:
+        Servicegroup:
+          $ref: "#/components/schemas/postServicegroupsRequestServicegroup"
+    postServicegroupsRequestServicegroup:
+      type: "object"
+      required:
+        - "container"
+      properties:
+        description:
+          type: "string"
+          example: "Example description"
+        hostgroup_url:
+          type: "string"
+          example: "https://example.com"
+        container:
+          type: object
+          required:
+            - "parent_id"
+            - "name"
+          properties:
+            parent_id:
+              type: integer
+              format: "int64"
+              example: 1
+            name:
+              type: string
+              example: "Example group"
+        services:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+        servicetemplates:
+          type: object
+          properties:
+            _ids:
+              type: array
+              items:
+                type: integer
+                example: 1
+    
