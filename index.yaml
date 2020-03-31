@@ -55,6 +55,11 @@ tags:
     externalDocs:
       description: Technical documentation
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462744'
+  - name: Service groups
+    description: Basic Monitoring
+    externalDocs:
+      description: Technical documentation
+      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462736'
   - name: Services
     description: Basic Monitoring
     externalDocs:
@@ -166,6 +171,9 @@ paths:
   /hostgroups/delete/{hostgroupId}.json:
     $ref: "http://localhost:81/hostgroups.yaml#/requests/delete"
 
+  /servicegroups/index.json:
+    $ref: "http://localhost:81/servicegroups.yaml#/requests/index"
+  
 
 components:
   securitySchemes:
