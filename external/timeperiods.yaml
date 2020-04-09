@@ -167,7 +167,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://localhost:81/globalschemas.yaml#/successResponse'
+                $ref: './globalschemas.yaml#/successResponse'
       security:
         - ApiKeyAuth: []
 
@@ -211,7 +211,7 @@ components:
         all_timeperiods:
           $ref: '#/components/schemas/getTimeperiodsResponseCommandObject'
         scroll:
-          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
+          $ref: './globalschemas.yaml#/Scroll'
     getTimeperiodsResponseCommandObject:
       type: object
       properties:

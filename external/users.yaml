@@ -105,7 +105,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+                $ref: './globalschemas.yaml#/idResponse'
         400:
           description: "Be sure all required fields are submitted. Possible error: the email has to be unique."
         500:
@@ -176,7 +176,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://localhost:81/globalschemas.yaml#/successResponse'
+                $ref: './globalschemas.yaml#/successResponse'
       security:
         - ApiKeyAuth: []
 
@@ -188,7 +188,7 @@ components:
         all_users:
           $ref: '#/components/schemas/getUsersResponseUserObject'
         scroll:
-          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
+          $ref: './globalschemas.yaml#/Scroll'
     getUsersResponseUserObject:
       type: "array"
       items:

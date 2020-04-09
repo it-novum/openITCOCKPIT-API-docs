@@ -88,7 +88,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+                $ref: './globalschemas.yaml#/idResponse'
         500:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
@@ -127,7 +127,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://localhost:81/globalschemas.yaml#/idResponse'
+                $ref: './globalschemas.yaml#/idResponse'
         500:
           description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
       security:
@@ -159,7 +159,7 @@ requests:
           content:
             application/json:
               schema:
-                $ref: 'http://localhost:81/globalschemas.yaml#/successResponse'
+                $ref: './globalschemas.yaml#/successResponse'
       security:
         - ApiKeyAuth: []
 
@@ -203,7 +203,7 @@ components:
         all_hosttemplates:
           $ref: '#/components/schemas/getHosttemplatesResponseHosttemplateObject'
         scroll:
-          $ref: 'http://localhost:81/globalschemas.yaml#/Scroll'
+          $ref: './globalschemas.yaml#/Scroll'
     getHosttemplatesResponseHosttemplateObject:
       type: "array"
       items:
