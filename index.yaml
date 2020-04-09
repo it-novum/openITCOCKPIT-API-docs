@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: openITCOCKPIT API
-  description: 'This is a openITCOCKPIT API description (alpha).<br>You can find out more about openITCOCKPIT at [https://openitcockpit.io](https://openitcockpit.io) or use our community IRC Channel at [irc.freenode.net, #openitcockpit](https://kiwiirc.com/nextclient/irc.freenode.net/#openitcockpit).<br><br>For this api sample, you can use the api key `bcc965e7e782d0ce1d86c5c9dfae7aebbd3587e2f90f7e641e795da7f06706e6904d57de3bd600c9b20627737069fc38c4ffd760f777f877f9b7df050029d3ca1df681d807bec276302235fd7193717b` to authorize yourself.'
+  description: 'This is our sample openITCOCKPIT API description. It´s connected to our public demo system [https://demo.openitcockpit.io](https://demo.openitcockpit.io)<br>You can find out more about openITCOCKPIT at [https://openitcockpit.io](https://openitcockpit.io) or use our community IRC Channel at [irc.freenode.net, #openitcockpit](https://kiwiirc.com/nextclient/irc.freenode.net/#openitcockpit).'
   contact:
     email: development@openitcockpit.io
   license:
@@ -77,122 +77,122 @@ tags:
       url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462746'
 paths:
   /commands/index.json:
-    $ref: "http://localhost:81/commands.yaml#/requests/index"
+    $ref: "./external/commands.yaml#/requests/index"
   /commands/add.json:
-    $ref: "http://localhost:81/commands.yaml#/requests/add"
+    $ref: "./external/commands.yaml#/requests/add"
   /commands/edit/{commandId}.json:
-    $ref: "http://localhost:81/commands.yaml#/requests/edit"
+    $ref: "./external/commands.yaml#/requests/edit"
   /commands/delete/{commandId}.json:
-    $ref: "http://localhost:81/commands.yaml#/requests/delete"
+    $ref: "./external/commands.yaml#/requests/delete"
   /commands/copy/.json:
-    $ref: "http://localhost:81/commands.yaml#/requests/copy"
+    $ref: "./external/commands.yaml#/requests/copy"
 
   /timeperiods/index.json:
-    $ref: "http://localhost:81/timeperiods.yaml#/requests/index"
+    $ref: "./external/timeperiods.yaml#/requests/index"
   /timeperiods/add.json:
-    $ref: "http://localhost:81/timeperiods.yaml#/requests/add"
+    $ref: "./external/timeperiods.yaml#/requests/add"
   /timeperiods/edit/{timeperiodId}.json:
-    $ref: "http://localhost:81/timeperiods.yaml#/requests/edit"
+    $ref: "./external/timeperiods.yaml#/requests/edit"
   /timeperiods/delete/{timeperiodId}.json:
-    $ref: "http://localhost:81/timeperiods.yaml#/requests/delete"
+    $ref: "./external/timeperiods.yaml#/requests/delete"
   /timeperiods/copy/.json:
-    $ref: "http://localhost:81/timeperiods.yaml#/requests/copy"
+    $ref: "./external/timeperiods.yaml#/requests/copy"
 
   /contacts/index.json:
-    $ref: "http://localhost:81/contacts.yaml#/requests/index"
+    $ref: "./external/contacts.yaml#/requests/index"
   /contacts/add.json:
-    $ref: "http://localhost:81/contacts.yaml#/requests/add"
+    $ref: "./external/contacts.yaml#/requests/add"
   /contacts/edit/{contactId}.json:
-    $ref: "http://localhost:81/contacts.yaml#/requests/edit"
+    $ref: "./external/contacts.yaml#/requests/edit"
   /contacts/delete/{contactId}.json:
-    $ref: "http://localhost:81/contacts.yaml#/requests/delete"
+    $ref: "./external/contacts.yaml#/requests/delete"
   /contacts/copy/.json:
-    $ref: "http://localhost:81/contacts.yaml#/requests/copy"
+    $ref: "./external/contacts.yaml#/requests/copy"
 
   /contactgroups/index.json:
-    $ref: "http://localhost:81/contactgroups.yaml#/requests/index"
+    $ref: "./external/contactgroups.yaml#/requests/index"
   /contactgroups/add.json:
-    $ref: "http://localhost:81/contactgroups.yaml#/requests/add"
+    $ref: "./external/contactgroups.yaml#/requests/add"
   /contactgroups/edit/{contactgroupId}.json:
-    $ref: "http://localhost:81/contactgroups.yaml#/requests/edit"
+    $ref: "./external/contactgroups.yaml#/requests/edit"
   /contactgroups/delete/{contactgroupId}.json:
-    $ref: "http://localhost:81/contactgroups.yaml#/requests/delete"
+    $ref: "./external/contactgroups.yaml#/requests/delete"
   /contactgroups/copy/.json:
-    $ref: "http://localhost:81/contactgroups.yaml#/requests/copy"
+    $ref: "./external/contactgroups.yaml#/requests/copy"
 
   /hosttemplates/index.json:
-    $ref: "http://localhost:81/hosttemplates.yaml#/requests/index"
+    $ref: "./external/hosttemplates.yaml#/requests/index"
   /hosttemplates/add.json:
-    $ref: "http://localhost:81/hosttemplates.yaml#/requests/add"
+    $ref: "./external/hosttemplates.yaml#/requests/add"
   /hosttemplates/edit/{hosttemplateId}.json:
-    $ref: "http://localhost:81/hosttemplates.yaml#/requests/edit"
+    $ref: "./external/hosttemplates.yaml#/requests/edit"
   /hosttemplates/delete/{hosttemplateId}.json:
-    $ref: "http://localhost:81/hosttemplates.yaml#/requests/delete"
+    $ref: "./external/hosttemplates.yaml#/requests/delete"
   /hosttemplates/copy/.json:
-    $ref: "http://localhost:81/hosttemplates.yaml#/requests/copy"
+    $ref: "./external/hosttemplates.yaml#/requests/copy"
 
   /hosts/index.json:
-    $ref: "http://localhost:81/hosts.yaml#/requests/index"
+    $ref: "./external/hosts.yaml#/requests/index"
   /hosts/add.json:
-    $ref: "http://localhost:81/hosts.yaml#/requests/add"
+    $ref: "./external/hosts.yaml#/requests/add"
   /hosts/edit/{hostId}.json:
-    $ref: "http://localhost:81/hosts.yaml#/requests/edit"
+    $ref: "./external/hosts.yaml#/requests/edit"
   /hosts/delete/{hostId}.json:
-    $ref: "http://localhost:81/hosts.yaml#/requests/delete"
+    $ref: "./external/hosts.yaml#/requests/delete"
 
   /servicetemplates/index.json:
-    $ref: "http://localhost:81/servicetemplates.yaml#/requests/index"
+    $ref: "./external/servicetemplates.yaml#/requests/index"
   /servicetemplates/add.json:
-    $ref: "http://localhost:81/servicetemplates.yaml#/requests/add"
+    $ref: "./external/servicetemplates.yaml#/requests/add"
   /servicetemplates/edit/{servicetemplateId}.json:
-    $ref: "http://localhost:81/servicetemplates.yaml#/requests/edit"
+    $ref: "./external/servicetemplates.yaml#/requests/edit"
   /servicetemplates/delete/{servicetemplateId}.json:
-    $ref: "http://localhost:81/servicetemplates.yaml#/requests/delete"
+    $ref: "./external/servicetemplates.yaml#/requests/delete"
 
   /services/index.json:
-    $ref: "http://localhost:81/services.yaml#/requests/index"
+    $ref: "./external/services.yaml#/requests/index"
   /services/add.json:
-    $ref: "http://localhost:81/services.yaml#/requests/add"
+    $ref: "./external/services.yaml#/requests/add"
   /services/edit/{serviceId}.json:
-    $ref: "http://localhost:81/services.yaml#/requests/edit"
+    $ref: "./external/services.yaml#/requests/edit"
   /services/delete/{serviceId}.json:
-    $ref: "http://localhost:81/services.yaml#/requests/delete"
+    $ref: "./external/services.yaml#/requests/delete"
 
   /users/index.json:
-    $ref: "http://localhost:81/users.yaml#/requests/index"
+    $ref: "./external/users.yaml#/requests/index"
   /users/add.json:
-    $ref: "http://localhost:81/users.yaml#/requests/add"
+    $ref: "./external/users.yaml#/requests/add"
   /users/edit/{userId}.json:
-    $ref: "http://localhost:81/users.yaml#/requests/edit"
+    $ref: "./external/users.yaml#/requests/edit"
   /users/delete/{userId}.json:
-    $ref: "http://localhost:81/users.yaml#/requests/delete"
+    $ref: "./external/users.yaml#/requests/delete"
 
   /hostgroups/index.json:
-    $ref: "http://localhost:81/hostgroups.yaml#/requests/index"
+    $ref: "./external/hostgroups.yaml#/requests/index"
   /hostgroups/add.json:
-    $ref: "http://localhost:81/hostgroups.yaml#/requests/add"
+    $ref: "./external/hostgroups.yaml#/requests/add"
   /hostgroups/edit/{hostgroupId}.json:
-    $ref: "http://localhost:81/hostgroups.yaml#/requests/edit"
+    $ref: "./external/hostgroups.yaml#/requests/edit"
   /hostgroups/delete/{hostgroupId}.json:
-    $ref: "http://localhost:81/hostgroups.yaml#/requests/delete"
+    $ref: "./external/hostgroups.yaml#/requests/delete"
 
   /servicegroups/index.json:
-    $ref: "http://localhost:81/servicegroups.yaml#/requests/index"
+    $ref: "./external/servicegroups.yaml#/requests/index"
   /servicegroups/add.json:
-    $ref: "http://localhost:81/servicegroups.yaml#/requests/add"
+    $ref: "./external/servicegroups.yaml#/requests/add"
   /servicegroups/edit/{servicegroupId}.json:
-    $ref: "http://localhost:81/servicegroups.yaml#/requests/edit"
+    $ref: "./external/servicegroups.yaml#/requests/edit"
   /servicegroups/delete/{servicegroupId}.json:
-    $ref: "http://localhost:81/servicegroups.yaml#/requests/delete"
+    $ref: "./external/servicegroups.yaml#/requests/delete"
 
   /servicetemplategroups/index.json:
-    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/index"
+    $ref: "./external/servicetemplategroups.yaml#/requests/index"
   /servicetemplategroups/add.json:
-    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/add"
+    $ref: "./external/servicetemplategroups.yaml#/requests/add"
   /servicetemplategroups/edit/{servicetemplategroupId}.json:
-    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/edit"
+    $ref: "./external/servicetemplategroups.yaml#/requests/edit"
   /servicetemplategroups/delete/{servicetemplategroupId}.json:
-    $ref: "http://localhost:81/servicetemplategroups.yaml#/requests/delete"
+    $ref: "./external/servicetemplategroups.yaml#/requests/delete"
 
 
 components:
