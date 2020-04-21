@@ -12,7 +12,6 @@ externalDocs:
   description: Complete technical documentation
   url: 'https://docs.it-novum.com/display/ODE'
 servers:
-  - url: 'https://ttriebensky.oitc.itn'
   - url: 'https://demo.openitcockpit.io'
 tags:
   - name: Commands

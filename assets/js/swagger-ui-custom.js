@@ -15,7 +15,7 @@ window.onload = function(){
         layout: "StandaloneLayout",
         onComplete: function(){
             // Default API key
-            ui.preauthorizeApiKey("ApiKeyAuth", "bcc965e7e782d0ce1d86c5c9dfae7aebbd3587e2f90f7e641e795da7f06706e6904d57de3bd600c9b20627737069fc38c4ffd760f777f877f9b7df050029d3ca1df681d807bec276302235fd7193717b");
+            ui.preauthorizeApiKey("ApiKeyAuth", "d2083e61fee067077ac239b7d89084f31c16a66f5e2908f6f74009492b600d3d90db2c5f6175ff199c31e1adbdcf6cf089ecadaf1c93c776bc19c7f41feb42b58f2637883b1a1273035f0ade592415f5");
         }
     });
     // End Swagger UI call region
