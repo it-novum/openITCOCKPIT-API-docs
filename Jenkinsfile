@@ -10,7 +10,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'rsync -avz -e "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa" --progress ./ oitc@172.16.101.32:/var/www/openitcockpit_io/api'
+                sh 'rsync -avz -e "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa" --progress ./ oitc@srvitnweb05.master.dns:/var/www/openitcockpit.io/api'
             }
         }
     }
