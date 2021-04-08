@@ -16,64 +16,28 @@ servers:
 tags:
   - name: Commands
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462728'
   - name: Time periods
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23463621'
   - name: Contacts
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/display/ODE/Finding+contacts'
   - name: Contact groups
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/display/ODE/Finding+contact+groups'
   - name: Host templates
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462734'
   - name: Host groups
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462730'
   - name: Hosts
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462732'
   - name: Service templates
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462744'
   - name: Service groups
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462736'
   - name: Service template groups
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462742'
   - name: Services
     description: Basic Monitoring
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462740'
   - name: Users
     description: User Management
-    externalDocs:
-      description: Technical documentation
-      url: 'https://docs.it-novum.com/pages/viewpage.action?pageId=23462746'
 paths:
   /commands/index.json:
     $ref: "./external/commands.yaml#/requests/index"

@@ -207,7 +207,7 @@ components:
         allowEdit:
           type: boolean
           example: "true"
-        Containers:
+        container:
           type: object
           properties:
             id:
