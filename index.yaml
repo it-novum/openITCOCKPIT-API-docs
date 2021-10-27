@@ -7,10 +7,10 @@ info:
   license:
     name: MIT Licensed
     url: 'https://raw.githubusercontent.com/it-novum/openITCOCKPIT-API-docs/master/LICENSE'
-  version: 4.0.0
+  version: 4.3.0
 externalDocs:
   description: Complete technical documentation
-  url: 'https://docs.it-novum.com/display/ODE'
+  url: 'https://docs.openitcockpit.io/'
 servers:
   - url: 'https://demo.openitcockpit.io'
 tags:
@@ -38,6 +38,8 @@ tags:
     description: Basic Monitoring
   - name: Users
     description: User Management
+  - name: Agent
+    description: Agent
 paths:
   /commands/index.json:
     $ref: "./external/commands.yaml#/requests/index"
@@ -157,6 +159,16 @@ paths:
   /servicetemplategroups/delete/{servicetemplategroupId}.json:
     $ref: "./external/servicetemplategroups.yaml#/requests/delete"
 
+  /agentconnector/config.json:
+    $ref: "./external/agent.yaml#/requests/config"
+  /agentconnector/install.json:
+    $ref: "./external/agent.yaml#/requests/install"
+  /agentconnector/autotls.json:
+    $ref: "./external/agent.yaml#/requests/autotls"
+  /agentconnector/select_agent.json:
+    $ref: "./external/agent.yaml#/requests/select_agent"
+  /agentconnector/create_services.json:
+    $ref: "./external/agent.yaml#/requests/create_services"
 
 components:
   securitySchemes:

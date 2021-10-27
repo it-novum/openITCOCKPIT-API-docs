@@ -1,0 +1,2056 @@
+requests:
+  config:
+    post:
+      tags:
+        - Agent
+      summary: "Configure Agent"
+      description: "Basic Agent Configuration which determines the Operational Mode, Security and Check Configuration"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postAgentRequest'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: './globalschemas.yaml#/idResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: [ ]
+  install:
+    get:
+      tags:
+        - Agent
+      summary: "Install Agent"
+      description: "Install Agent"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostId
+          in: query
+          description: ID of the host where the agent has to be installed
+          required: true
+          schema:
+            type: integer
+          example: 18
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAgentInstallResponse"
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: [ ]
+  autotls:
+    get:
+      tags:
+        - Agent
+      summary: "PULL mode only - Exchange TLS Certificates between openITCOCKPIT and Agent"
+      description: "PULL mode only - Exchange Certificates"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostId
+          in: query
+          description: ID of the host where the agent has to be installed
+          required: true
+          schema:
+            type: integer
+          example: 18
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAgentAutotlsResponse"
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: [ ]
+  select_agent:
+    get:
+      tags:
+        - Agent
+      summary: "PUSH mode only - Get Push Agent ID"
+      description: "PUSH mode only - Get ID of the Push Agents"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostId
+          in: query
+          description: ID of the host where the agent has to be installed
+          required: true
+          schema:
+            type: integer
+          example: 18
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAgentSelectAgentResponse"
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: [ ]
+    post:
+      tags:
+        - Agent
+      summary: "PUSH mode only - Save Push Agent ID"
+      description: "PUSH mode only - Assign the Push Agent to the configuration"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postSelectAgentRequest'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: './globalschemas.yaml#/successResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: [ ]
+  create_services:
+    get:
+      tags:
+        - Agent
+      summary: "Get list of possible services from the Agent"
+      description: "Get list of possible services from the Agent"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostId
+          in: query
+          description: ID of the host where the agent has to be installed
+          required: true
+          schema:
+            type: integer
+          example: 18
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAgentCreateServicesResponse"
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: [ ]
+    post:
+      tags:
+        - Agent
+      summary: "Save services"
+      description: "Save possible services"
+      parameters:
+        - name: angular
+          in: query
+          description: Use angular=true to get API results instead of a html template
+          required: true
+          schema:
+            type: boolean
+          example: true
+        - name: hostId
+          in: query
+          description: ID of the host where the agent has to be installed
+          required: true
+          schema:
+            type: integer
+          example: 18
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postAgentCreateServicesRequest'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: './globalschemas.yaml#/successResponse'
+        500:
+          description: "Webserver returns error code for OPTIONS request instead of right configured Access-Control-Allow-* headers"
+      security:
+        - ApiKeyAuth: [ ]
+
+
+components:
+  schemas:
+    postAgentRequest:
+      type: "object"
+      required:
+        - "config"
+        - "hostId"
+        - "pushAgentId"
+      properties:
+        config:
+          type: "object"
+          properties:
+            string:
+              type: object
+              properties:
+                bind_address:
+                  type: "string"
+                  example: "0.0.0.0"
+                username:
+                  type: "string"
+                  example: ""
+                password:
+                  type: "string"
+                  example: ""
+                push_oitc_server_url:
+                  type: "string"
+                  example: ""
+                push_oitc_api_key:
+                  type: "string"
+                  example: ""
+                operating_system:
+                  type: "string"
+                  example: "linux"
+                push_proxy_address:
+                  type: "string"
+                  example: ""
+                customchecks_path:
+                  type: "string"
+                  example: ""
+                ssl_certfile:
+                  type: "string"
+                  example: ""
+                ssl_keyfile:
+                  type: "string"
+                  example: ""
+                autossl_folder:
+                  type: "string"
+                  example: ""
+                autossl_csr_file:
+                  type: "string"
+                  example: ""
+                autossl_crt_file:
+                  type: "string"
+                  example: ""
+                autossl_key_file:
+                  type: "string"
+                  example: ""
+                autossl_ca_file:
+                  type: "string"
+                  example: ""
+            bool:
+              type: object
+              properties:
+                enable_push_mode:
+                  type: "bool"
+                  example: false
+                use_proxy:
+                  type: "bool"
+                  example: false
+                enable_remote_config_update:
+                  type: "bool"
+                  example: false
+                use_http_basic_auth:
+                  type: "bool"
+                  example: false
+                push_verify_server_certificate:
+                  type: "bool"
+                  example: false
+                push_enable_webserver:
+                  type: "bool"
+                  example: false
+                push_webserver_use_https:
+                  type: "bool"
+                  example: true
+                use_autossl:
+                  type: "bool"
+                  example: true
+                use_https:
+                  type: "bool"
+                  example: false
+                use_https_verify:
+                  type: "bool"
+                  example: false
+                cpustats:
+                  type: "bool"
+                  example: true
+                memory:
+                  type: "bool"
+                  example: true
+                swap:
+                  type: "bool"
+                  example: true
+                processstats:
+                  type: "bool"
+                  example: true
+                netstats:
+                  type: "bool"
+                  example: true
+                netio:
+                  type: "bool"
+                  example: true
+                diskstats:
+                  type: "bool"
+                  example: true
+                diskio:
+                  type: "bool"
+                  example: true
+                systemdservices:
+                  type: "bool"
+                  example: true
+                launchdservices:
+                  type: "bool"
+                  example: true
+                winservices:
+                  type: "bool"
+                  example: true
+                wineventlog:
+                  type: "bool"
+                  example: true
+                sensorstats:
+                  type: "bool"
+                  example: true
+                dockerstats:
+                  type: "bool"
+                  example: false
+                libvirt:
+                  type: "bool"
+                  example: true
+                userstats:
+                  type: "bool"
+                  example: true
+            int:
+              type: object
+              properties:
+                bind_port:
+                  type: "integer"
+                  example: 3333
+                check_interval:
+                  type: "integer"
+                  example: 30
+                push_timeout:
+                  type: "integer"
+                  example: 10
+            array:
+              type: object
+              properties:
+                win_eventlog_types:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "System","Application","Security" ]
+        hostId:
+          type: "integer"
+          format: "int64"
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+          example: 18
+        pushAgentId:
+          type: "bool"
+          example: null
+
+    postSelectAgentRequest:
+      type: "object"
+      required:
+        - "config"
+        - "host"
+      properties:
+        pushagent:
+          type: object
+          properties:
+            id:
+              type: "integer"
+              example: 2
+            host_id:
+              type: "string"
+              example: "18"
+
+    postAgentCreateServicesRequest:
+      type: "object"
+      required:
+        - "services"
+      properties:
+        services:
+          type: array
+          items:
+            type: object
+            anyOf:
+              - $ref: "#/components/schemas/postAgentCreateServicesDocker"
+              - $ref: "#/components/schemas/postAgentCreateServicesSSH"
+
+    postAgentCreateServicesDocker:
+      type: "object"
+      required:
+        - host_id
+        - servicetemplate_id
+        - name
+        - servicecommandargumentvalues
+      properties:
+        host_id:
+          type: "integer"
+          example: 18
+        servicetemplate_id:
+          type: "integer"
+          example: 129
+        name:
+          type: "string"
+          example: "docker.service"
+        servicecommandargumentvalues:
+          type: array
+          items:
+            type: object
+            anyOf:
+              - $ref: "#/components/schemas/getAgentCreateServicesDockerServiceCommandargumentvalues1"
+              - $ref: "#/components/schemas/getAgentCreateServicesDockerServiceCommandargumentvalues2"
+
+    postAgentCreateServicesSSH:
+      type: "object"
+      required:
+        - host_id
+        - servicetemplate_id
+        - name
+        - servicecommandargumentvalues
+      properties:
+        host_id:
+          type: "integer"
+          example: 18
+        servicetemplate_id:
+          type: "integer"
+          example: 129
+        name:
+          type: "string"
+          example: "ssh.service"
+        servicecommandargumentvalues:
+          type: array
+          items:
+            type: object
+            anyOf:
+              - $ref: "#/components/schemas/getAgentCreateServicesSSHServiceCommandargumentvalues1"
+              - $ref: "#/components/schemas/getAgentCreateServicesSSHServiceCommandargumentvalues2"
+
+    getAgentSelectAgentResponse:
+      type: "object"
+      required:
+        - "config"
+        - "host"
+      properties:
+        config:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              example: 14
+            host_id:
+              type: "integer"
+              example: 18
+            port:
+              type: "integer"
+              example: 3333
+            use_https:
+              type: "bool"
+              example: false
+            insecure:
+              type: "bool"
+              example: true
+            use_autossl:
+              type: "bool"
+              example: true
+            autossl_successful:
+              type: "bool"
+              example: false
+            use_push_mode:
+              type: "bool"
+              example: true
+            basic_auth:
+              type: "bool"
+              example: false
+            proxy:
+              type: "bool"
+              example: false
+            username:
+              type: "string"
+              example: ""
+            password:
+              type: "string"
+              example: ""
+            push_noticed:
+              type: "bool"
+              example: false
+            config:
+              type: "string"
+              example: "{\u0022string\u0022:{\u0022bind_address\u0022:\u00220.0.0.0\u0022,\u0022username\u0022:\u0022\u0022,\u0022password\u0022:\u0022\u0022,\u0022push_oitc_server_url\u0022:\u0022https:\\\/\\\/127.0.0.1\u0022,\u0022push_oitc_api_key\u0022:\u002241766966999f4c533f7e670662fbc6fa1e4de898852fcffa69c34f35183977b1d1bf2cb33f5252dbf9e14094bc9ede14d2cd2a4ffe9b217e822a42eda07e770e2fccc6d989061ca58f07471db1f5bdbb\u0022,\u0022operating_system\u0022:\u0022linux\u0022,\u0022push_proxy_address\u0022:\u0022\u0022,\u0022customchecks_path\u0022:\u0022\u0022,\u0022ssl_certfile\u0022:\u0022\u0022,\u0022ssl_keyfile\u0022:\u0022\u0022,\u0022autossl_folder\u0022:\u0022\u0022,\u0022autossl_csr_file\u0022:\u0022\u0022,\u0022autossl_crt_file\u0022:\u0022\u0022,\u0022autossl_key_file\u0022:\u0022\u0022,\u0022autossl_ca_file\u0022:\u0022\u0022,\u0022config_version\u0022:\u00223.0.0\u0022},\u0022bool\u0022:{\u0022enable_push_mode\u0022:true,\u0022use_proxy\u0022:false,\u0022enable_remote_config_update\u0022:false,\u0022use_http_basic_auth\u0022:false,\u0022push_verify_server_certificate\u0022:false,\u0022push_enable_webserver\u0022:false,\u0022push_webserver_use_https\u0022:true,\u0022use_autossl\u0022:false,\u0022use_https\u0022:false,\u0022use_https_verify\u0022:false,\u0022cpustats\u0022:true,\u0022memory\u0022:true,\u0022swap\u0022:true,\u0022processstats\u0022:true,\u0022netstats\u0022:true,\u0022netio\u0022:true,\u0022diskstats\u0022:true,\u0022diskio\u0022:true,\u0022systemdservices\u0022:true,\u0022launchdservices\u0022:true,\u0022winservices\u0022:true,\u0022wineventlog\u0022:true,\u0022sensorstats\u0022:true,\u0022dockerstats\u0022:false,\u0022libvirt\u0022:true,\u0022userstats\u0022:true},\u0022int\u0022:{\u0022bind_port\u0022:3333,\u0022check_interval\u0022:30,\u0022push_timeout\u0022:10},\u0022array\u0022:{\u0022win_eventlog_types\u0022:[\u0022System\u0022,\u0022Application\u0022,\u0022Security\u0022]}}"
+            created:
+              type: "string"
+              example: "2021-10-18T06:47:16+00:00"
+            modified:
+              type: "string"
+              example: "2021-10-18T06:47:16+00:00"
+        host:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              example: 18
+            uuid:
+              type: "string"
+              example: "11d29f19-c9b6-40b3-9359-b7aaf22dc080"
+            container_id:
+              type: "integer"
+              example: 1
+            name:
+              type: "string"
+              example: "openITCOCKPIT Monitoring Agent Demo Host"
+            description:
+              type: "integer"
+              example: null
+            hosttemplate_id:
+              type: "integer"
+              example: 2
+            address:
+              type: "string"
+              example: "127.0.0.1"
+            command_id:
+              type: "integer"
+              example: null
+            eventhandler_command_id:
+              type: "integer"
+              example: null
+            timeperiod_id:
+              type: "integer"
+              example: null
+            check_interval:
+              type: "integer"
+              example: null
+            retry_interval:
+              type: "integer"
+              example: null
+            max_check_attempts:
+              type: "integer"
+              example: null
+            first_notification_delay:
+              type: "integer"
+              example: null
+            notification_interval:
+              type: "integer"
+              example: null
+            notify_on_down:
+              type: "integer"
+              example: null
+            notify_on_unreachable:
+              type: "integer"
+              example: null
+            notify_on_recovery:
+              type: "integer"
+              example: null
+            notify_on_flapping:
+              type: "integer"
+              example: null
+            notify_on_downtime:
+              type: "integer"
+              example: null
+            flap_detection_enabled:
+              type: "integer"
+              example: null
+            flap_detection_on_up:
+              type: "integer"
+              example: null
+            flap_detection_on_down:
+              type: "integer"
+              example: null
+            flap_detection_on_unreachable:
+              type: "integer"
+              example: null
+            low_flap_threshold:
+              type: "integer"
+              example: null
+            high_flap_threshold:
+              type: "integer"
+              example: null
+            process_performance_data:
+              type: "integer"
+              example: null
+            freshness_checks_enabled:
+              type: "integer"
+              example: null
+            freshness_threshold:
+              type: "integer"
+              example: null
+            passive_checks_enabled:
+              type: "integer"
+              example: null
+            event_handler_enabled:
+              type: "integer"
+              example: null
+            active_checks_enabled:
+              type: boolean
+              example: null
+            retain_status_information:
+              type: "integer"
+              example: null
+            retain_nonstatus_information:
+              type: "integer"
+              example: null
+            notifications_enabled:
+              type: "integer"
+              example: null
+            notes:
+              type: "integer"
+              example: null
+            priority:
+              type: "integer"
+              example: null
+            check_period_id:
+              type: "integer"
+              example: null
+            notify_period_id:
+              type: "integer"
+              example: null
+            tags:
+              type: "string"
+              example: null
+            own_contacts:
+              type: "integer"
+              example: 0
+            own_contactgroups:
+              type: "integer"
+              example: 0
+            own_customvariables:
+              type: "integer"
+              example: 0
+            host_url:
+              type: "string"
+              example: null
+            satellite_id:
+              type: "integer"
+              example: 0
+            host_type:
+              type: "integer"
+              example: 1
+            disabled:
+              type: "integer"
+              example: 0
+            usage_flag:
+              type: "integer"
+              example: 0
+            created:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+            modified:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+        pushAgents:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              example: 2
+            name:
+              type: "string"
+              example: "agent (127.0.0.1)"
+        selectedPushAgentId:
+          type: "string"
+          example: 2
+
+    getAgentInstallResponse:
+      type: "object"
+      properties:
+        config:
+          type: "object"
+          properties:
+            string:
+              type: object
+              properties:
+                bind_address:
+                  type: "string"
+                  example: "0.0.0.0"
+                username:
+                  type: "string"
+                  example: ""
+                password:
+                  type: "string"
+                  example: ""
+                push_oitc_server_url:
+                  type: "string"
+                  example: ""
+                push_oitc_api_key:
+                  type: "string"
+                  example: ""
+                operating_system:
+                  type: "string"
+                  example: "linux"
+                push_proxy_address:
+                  type: "string"
+                  example: ""
+                customchecks_path:
+                  type: "string"
+                  example: ""
+                ssl_certfile:
+                  type: "string"
+                  example: ""
+                ssl_keyfile:
+                  type: "string"
+                  example: ""
+                autossl_folder:
+                  type: "string"
+                  example: ""
+                autossl_csr_file:
+                  type: "string"
+                  example: ""
+                autossl_crt_file:
+                  type: "string"
+                  example: ""
+                autossl_key_file:
+                  type: "string"
+                  example: ""
+                autossl_ca_file:
+                  type: "string"
+                  example: ""
+                config_version:
+                  type: "string"
+                  example: "3.0.0"
+            bool:
+              type: object
+              properties:
+                enable_push_mode:
+                  type: "bool"
+                  example: false
+                use_proxy:
+                  type: "bool"
+                  example: false
+                enable_remote_config_update:
+                  type: "bool"
+                  example: false
+                use_http_basic_auth:
+                  type: "bool"
+                  example: false
+                push_verify_server_certificate:
+                  type: "bool"
+                  example: false
+                push_enable_webserver:
+                  type: "bool"
+                  example: false
+                push_webserver_use_https:
+                  type: "bool"
+                  example: true
+                use_autossl:
+                  type: "bool"
+                  example: true
+                use_https:
+                  type: "bool"
+                  example: false
+                use_https_verify:
+                  type: "bool"
+                  example: false
+                cpustats:
+                  type: "bool"
+                  example: true
+                memory:
+                  type: "bool"
+                  example: true
+                swap:
+                  type: "bool"
+                  example: true
+                processstats:
+                  type: "bool"
+                  example: true
+                netstats:
+                  type: "bool"
+                  example: true
+                netio:
+                  type: "bool"
+                  example: true
+                diskstats:
+                  type: "bool"
+                  example: true
+                diskio:
+                  type: "bool"
+                  example: true
+                systemdservices:
+                  type: "bool"
+                  example: true
+                launchdservices:
+                  type: "bool"
+                  example: true
+                winservices:
+                  type: "bool"
+                  example: true
+                wineventlog:
+                  type: "bool"
+                  example: true
+                sensorstats:
+                  type: "bool"
+                  example: true
+                dockerstats:
+                  type: "bool"
+                  example: false
+                libvirt:
+                  type: "bool"
+                  example: true
+                userstats:
+                  type: "bool"
+                  example: true
+            int:
+              type: object
+              properties:
+                bind_port:
+                  type: "integer"
+                  example: 3333
+                check_interval:
+                  type: "integer"
+                  example: 30
+                push_timeout:
+                  type: "integer"
+                  example: 10
+            array:
+              type: object
+              properties:
+                win_eventlog_types:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "System","Application","Security" ]
+        host:
+          type: object
+          properties:
+            id:
+              type: "integer"
+              example: 18
+            uuid:
+              type: "string"
+              example: "11d29f19-c9b6-40b3-9359-b7aaf22dc080"
+            container_id:
+              type: "integer"
+              example: 1
+            name:
+              type: "string"
+              example: "openITCOCKPIT Monitoring Agent Demo Host"
+            description:
+              type: "integer"
+              example: null
+            hosttemplate_id:
+              type: "integer"
+              example: 2
+            address:
+              type: "string"
+              example: "127.0.0.1"
+            command_id:
+              type: "integer"
+              example: null
+            eventhandler_command_id:
+              type: "integer"
+              example: null
+            timeperiod_id:
+              type: "integer"
+              example: null
+            check_interval:
+              type: "integer"
+              example: null
+            retry_interval:
+              type: "integer"
+              example: null
+            max_check_attempts:
+              type: "integer"
+              example: null
+            first_notification_delay:
+              type: "integer"
+              example: null
+            notification_interval:
+              type: "integer"
+              example: null
+            notify_on_down:
+              type: "integer"
+              example: null
+            notify_on_unreachable:
+              type: "integer"
+              example: null
+            notify_on_recovery:
+              type: "integer"
+              example: null
+            notify_on_flapping:
+              type: "integer"
+              example: null
+            notify_on_downtime:
+              type: "integer"
+              example: null
+            flap_detection_enabled:
+              type: "integer"
+              example: null
+            flap_detection_on_up:
+              type: "integer"
+              example: null
+            flap_detection_on_down:
+              type: "integer"
+              example: null
+            flap_detection_on_unreachable:
+              type: "integer"
+              example: null
+            low_flap_threshold:
+              type: "integer"
+              example: null
+            high_flap_threshold:
+              type: "integer"
+              example: null
+            process_performance_data:
+              type: "integer"
+              example: null
+            freshness_checks_enabled:
+              type: "integer"
+              example: null
+            freshness_threshold:
+              type: "integer"
+              example: null
+            passive_checks_enabled:
+              type: "integer"
+              example: null
+            event_handler_enabled:
+              type: "integer"
+              example: null
+            active_checks_enabled:
+              type: boolean
+              example: null
+            retain_status_information:
+              type: "integer"
+              example: null
+            retain_nonstatus_information:
+              type: "integer"
+              example: null
+            notifications_enabled:
+              type: "integer"
+              example: null
+            notes:
+              type: "integer"
+              example: null
+            priority:
+              type: "integer"
+              example: null
+            check_period_id:
+              type: "integer"
+              example: null
+            notify_period_id:
+              type: "integer"
+              example: null
+            tags:
+              type: "string"
+              example: null
+            own_contacts:
+              type: "integer"
+              example: 0
+            own_contactgroups:
+              type: "integer"
+              example: 0
+            own_customvariables:
+              type: "integer"
+              example: 0
+            host_url:
+              type: "string"
+              example: null
+            satellite_id:
+              type: "integer"
+              example: 0
+            host_type:
+              type: "integer"
+              example: 1
+            disabled:
+              type: "integer"
+              example: 0
+            usage_flag:
+              type: "integer"
+              example: 0
+            created:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+            modified:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+        config_as_ini:
+          type: string
+          example: "[default]\n#\n# This is the configuration file for the openITCOCKPIT Monitoring Agent 3.x\n# Notice: Empty values will not been ignored! If you want to disable an option like proxy comment it out!\n\n#########################\n#       Web Server      #\n#########################\n\n# Bind address of the build-in web server\n# Use 0.0.0.0 to bind on all interfaces\naddress = 0.0.0.0\n\n# Port of the Agents build-in web server\n# Default port is 3333\nport = 3333\n\n#########################\n#   Security Settings   #\n#########################\n\n# Try to enable auto ssl mode for webserver\ntry-autossl = False\n\n# File paths used to store autossl related files (default: \/etc\/openitcockpit-agent\/):\n# Leave this blank to use the default values\n# Example: \/etc\/openitcockpit-agent\/agent.csr\n#autossl-csr-file =\n\n# Example: \/etc\/openitcockpit-agent\/agent.crt\n#autossl-crt-file =\n\n# Example: \/etc\/openitcockpit-agent\/agent.key\n#autossl-key-file =\n\n# Example: \/etc\/openitcockpit-agent\/server_ca.crt\n#autossl-ca-file =\n\n# If a certificate file is given, the agent will only be accessible through HTTPS\n# Instead of messing around with self-signed certificates we recommend to use the autossl feature.\n# Example: \/etc\/ssl\/certs\/ssl-cert-snakeoil.pem\n#certfile = \/etc\/ssl\/certs\/ssl-cert-snakeoil.pem\n\n# Private key file of the given TLS certificate\n# Example: \/etc\/ssl\/private\/ssl-cert-snakeoil.key\n#keyfile = \/etc\/ssl\/private\/ssl-cert-snakeoil.key\n\n# Enable remote read and write access to the current agent configuration (this file) and\n# the customchecks config\n# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n# ! WARNING: This could lead to remote code execution    !\n# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nconfig-update-mode = False\n\n# Enable HTTP Basic Authentication\n# Example: auth = user:password\n#auth = user:password\n\n#########################\n#        Checks         #\n#########################\n\n# Determines in seconds how often the agent will schedule all internal checks\ninterval = 30\n\n# Remote Plugin Execution\n# Path to config will where custom checks can be defined\n# Comment to use the default value\n#\n# Linux: \/etc\/openitcockpit-agent\/customchecks.ini\n# Windows: C:\\Program Files\\it-novum\\openitcockpit-agent\\customchecks.ini\n# macOS: \/Applications\/openitcockpit-agent\/customchecks.ini\n#customchecks = \/etc\/openitcockpit-agent\/customchecks.ini\n\n#########################\n# Enable\/Disable checks #\n#########################\n\n# Enable CPU monitoring\ncpustats = True\n\n# Enable memory monitoring\nmemory = True\n\n# Enable Swap monitoring\nswap = True\n\n# Enable monitoring of running processes\nprocessstats = True\n\n# Enable monitoring of network interfaces\nnetstats = True\n\n# Enable monitoring of the traffic (I\/O) of network interfaces\nnetio = True\n\n# Enable disk usage monitoring\ndiskstats = True\n\n# Enable monitoring of disk I\/O\ndiskio = True\n\n# Enable monitoring of Systemd Services (Linux only)\nsystemdservices = True\n\n# Enable monitoring of Launchd Services (macOS only)\nlaunchdservices = True\n\n# Enable monitoring of Windows Services (Windows only)\nwinservices = True\n\n# Enable monitoring of Windows Event Log records (Windows only)\nwineventlog = True\n\n# Define comma separated windows event log log types\n# Event Logs containing spaces DO NOT need to be quoted: Security,Sophos Cloud AD Sync,Application\nwineventlog-logtypes = System,Application,Security\n\n# Enable monitoring of temperature and battery sensors\nsensorstats = True\n\n# Enable support to monitor Docker containers\n# Known issues: Error response from daemon: client version 1.41 is too new. Maximum supported API version is 1.40\n# Workaround: export DOCKER_API_VERSION=1.40\ndockerstats = False\n\n# Check KVMs through libvirt\n# This requires to complie the openITCOCKPIT Monitoring Agent by yourself.\n# Please see the Wiki for instructions: https:\/\/github.com\/it-novum\/openitcockpit-agent-go\/wiki\/Build-binary\nlibvirt = True\n\n# Enable logged in users check\nuserstats = True\n\n#########################\n#       Push mode       #\n#########################\n\n# By default openITCOCKPIT will pull check results from the openITCOCKPIT Agent.\n# In a cloud environments or behind a NAT network it could become handy\n# if the openITCOCKPIT Monitoring Agent will push the results to your openITCOCKPIT Server\n[oitc]\n\n# Enable Push Mode\nenabled = True\n\n# This option disables the webserver of the openITCOCKPIT Monitoring Agent when running in PUSH mode.\n# When you also want to enable the Webserver even if the agent is running in PUSH mode we highly recommend\n# to enable HTTP Basic Authentication and to use the certfile and keyfile options to enable HTTPS\nenable-webserver = False\n\n# Address of your openITCOCKPIT Server where the Agent will push the results to\n# Example: https:\/\/demo.openitcockpit.io\nurl = https:\/\/127.0.0.1\n\n# Enable this option when your openITCOCKPIT server uses valid TLS certificates\n# like from Let\u0027s Encrypt\nverify-server-certificate = False\n\n# Timeout in seconds for the HTTP push client\ntimeout = 10\n\n# API-Key of your openITCOCKPIT Server\napikey = 41766966999f4c533f7e670662fbc6fa1e4de898852fcffa69c34f35183977b1d1bf2cb33f5252dbf9e14094bc9ede14d2cd2a4ffe9b217e822a42eda07e770e2fccc6d989061ca58f07471db1f5bdbb\n\n# Address of HTTP\/HTTPS Proxy if required.\n# Comment to disable\n# Example: http:\/\/10.10.1.10:3128\n#proxy = http:\/\/10.10.1.10:3128\n"
+
+    getAgentAutotlsResponse:
+      type: "object"
+      properties:
+        config:
+          type: "object"
+          properties:
+            string:
+              type: object
+              properties:
+                bind_address:
+                  type: "string"
+                  example: "0.0.0.0"
+                username:
+                  type: "string"
+                  example: ""
+                password:
+                  type: "string"
+                  example: ""
+                push_oitc_server_url:
+                  type: "string"
+                  example: ""
+                push_oitc_api_key:
+                  type: "string"
+                  example: ""
+                operating_system:
+                  type: "string"
+                  example: "linux"
+                push_proxy_address:
+                  type: "string"
+                  example: ""
+                customchecks_path:
+                  type: "string"
+                  example: ""
+                ssl_certfile:
+                  type: "string"
+                  example: ""
+                ssl_keyfile:
+                  type: "string"
+                  example: ""
+                autossl_folder:
+                  type: "string"
+                  example: ""
+                autossl_csr_file:
+                  type: "string"
+                  example: ""
+                autossl_crt_file:
+                  type: "string"
+                  example: ""
+                autossl_key_file:
+                  type: "string"
+                  example: ""
+                autossl_ca_file:
+                  type: "string"
+                  example: ""
+                config_version:
+                  type: "string"
+                  example: "3.0.0"
+            bool:
+              type: object
+              properties:
+                enable_push_mode:
+                  type: "bool"
+                  example: false
+                use_proxy:
+                  type: "bool"
+                  example: false
+                enable_remote_config_update:
+                  type: "bool"
+                  example: false
+                use_http_basic_auth:
+                  type: "bool"
+                  example: false
+                push_verify_server_certificate:
+                  type: "bool"
+                  example: false
+                push_enable_webserver:
+                  type: "bool"
+                  example: false
+                push_webserver_use_https:
+                  type: "bool"
+                  example: true
+                use_autossl:
+                  type: "bool"
+                  example: true
+                use_https:
+                  type: "bool"
+                  example: false
+                use_https_verify:
+                  type: "bool"
+                  example: false
+                cpustats:
+                  type: "bool"
+                  example: true
+                memory:
+                  type: "bool"
+                  example: true
+                swap:
+                  type: "bool"
+                  example: true
+                processstats:
+                  type: "bool"
+                  example: true
+                netstats:
+                  type: "bool"
+                  example: true
+                netio:
+                  type: "bool"
+                  example: true
+                diskstats:
+                  type: "bool"
+                  example: true
+                diskio:
+                  type: "bool"
+                  example: true
+                systemdservices:
+                  type: "bool"
+                  example: true
+                launchdservices:
+                  type: "bool"
+                  example: true
+                winservices:
+                  type: "bool"
+                  example: true
+                wineventlog:
+                  type: "bool"
+                  example: true
+                sensorstats:
+                  type: "bool"
+                  example: true
+                dockerstats:
+                  type: "bool"
+                  example: false
+                libvirt:
+                  type: "bool"
+                  example: true
+                userstats:
+                  type: "bool"
+                  example: true
+            int:
+              type: object
+              properties:
+                bind_port:
+                  type: "integer"
+                  example: 3333
+                check_interval:
+                  type: "integer"
+                  example: 30
+                push_timeout:
+                  type: "integer"
+                  example: 10
+            array:
+              type: object
+              properties:
+                win_eventlog_types:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "System","Application","Security" ]
+        host:
+          type: object
+          properties:
+            id:
+              type: "integer"
+              example: 18
+            uuid:
+              type: "string"
+              example: "11d29f19-c9b6-40b3-9359-b7aaf22dc080"
+            container_id:
+              type: "integer"
+              example: 1
+            name:
+              type: "string"
+              example: "openITCOCKPIT Monitoring Agent Demo Host"
+            description:
+              type: "integer"
+              example: null
+            hosttemplate_id:
+              type: "integer"
+              example: 3
+            address:
+              type: "string"
+              example: "127.0.0.1"
+            command_id:
+              type: "integer"
+              example: null
+            eventhandler_command_id:
+              type: "integer"
+              example: null
+            timeperiod_id:
+              type: "integer"
+              example: null
+            check_interval:
+              type: "integer"
+              example: null
+            retry_interval:
+              type: "integer"
+              example: null
+            max_check_attempts:
+              type: "integer"
+              example: null
+            first_notification_delay:
+              type: "integer"
+              example: null
+            notification_interval:
+              type: "integer"
+              example: null
+            notify_on_down:
+              type: "integer"
+              example: null
+            notify_on_unreachable:
+              type: "integer"
+              example: null
+            notify_on_recovery:
+              type: "integer"
+              example: null
+            notify_on_flapping:
+              type: "integer"
+              example: null
+            notify_on_downtime:
+              type: "integer"
+              example: null
+            flap_detection_enabled:
+              type: "integer"
+              example: null
+            flap_detection_on_up:
+              type: "integer"
+              example: null
+            flap_detection_on_down:
+              type: "integer"
+              example: null
+            flap_detection_on_unreachable:
+              type: "integer"
+              example: null
+            low_flap_threshold:
+              type: "integer"
+              example: null
+            high_flap_threshold:
+              type: "integer"
+              example: null
+            process_performance_data:
+              type: "integer"
+              example: null
+            freshness_checks_enabled:
+              type: "integer"
+              example: null
+            freshness_threshold:
+              type: "integer"
+              example: null
+            passive_checks_enabled:
+              type: "integer"
+              example: null
+            event_handler_enabled:
+              type: "integer"
+              example: null
+            active_checks_enabled:
+              type: boolean
+              example: null
+            retain_status_information:
+              type: "integer"
+              example: null
+            retain_nonstatus_information:
+              type: "integer"
+              example: null
+            notifications_enabled:
+              type: "integer"
+              example: null
+            notes:
+              type: "integer"
+              example: null
+            priority:
+              type: "integer"
+              example: null
+            check_period_id:
+              type: "integer"
+              example: null
+            notify_period_id:
+              type: "integer"
+              example: null
+            tags:
+              type: "string"
+              example: null
+            own_contacts:
+              type: "integer"
+              example: 0
+            own_contactgroups:
+              type: "integer"
+              example: 0
+            own_customvariables:
+              type: "integer"
+              example: 0
+            host_url:
+              type: "string"
+              example: null
+            satellite_id:
+              type: "integer"
+              example: 0
+            host_type:
+              type: "integer"
+              example: 1
+            disabled:
+              type: "integer"
+              example: 0
+            usage_flag:
+              type: "integer"
+              example: 0
+            created:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+            modified:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+        connection_test:
+          type: object
+          properties:
+            status:
+              type: "string"
+              example: "success"
+            error:
+              type: "string"
+              example: "AutoTLS certificates successfully exchanged."
+            guzzle_error:
+              type: "string"
+              example: ""
+            oitc_errno:
+              type: "integer"
+              example: 0
+
+    getAgentCreateServicesResponse:
+      type: "object"
+      required:
+        - "host"
+        - "services"
+      properties:
+        host:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              example: 18
+            uuid:
+              type: "string"
+              example: "11d29f19-c9b6-40b3-9359-b7aaf22dc080"
+            container_id:
+              type: "integer"
+              example: 1
+            name:
+              type: "string"
+              example: "openITCOCKPIT Monitoring Agent Demo Host"
+            description:
+              type: "integer"
+              example: null
+            hosttemplate_id:
+              type: "integer"
+              example: 2
+            address:
+              type: "string"
+              example: "127.0.0.1"
+            command_id:
+              type: "integer"
+              example: null
+            eventhandler_command_id:
+              type: "integer"
+              example: null
+            timeperiod_id:
+              type: "integer"
+              example: null
+            check_interval:
+              type: "integer"
+              example: null
+            retry_interval:
+              type: "integer"
+              example: null
+            max_check_attempts:
+              type: "integer"
+              example: null
+            first_notification_delay:
+              type: "integer"
+              example: null
+            notification_interval:
+              type: "integer"
+              example: null
+            notify_on_down:
+              type: "integer"
+              example: null
+            notify_on_unreachable:
+              type: "integer"
+              example: null
+            notify_on_recovery:
+              type: "integer"
+              example: null
+            notify_on_flapping:
+              type: "integer"
+              example: null
+            notify_on_downtime:
+              type: "integer"
+              example: null
+            flap_detection_enabled:
+              type: "integer"
+              example: null
+            flap_detection_on_up:
+              type: "integer"
+              example: null
+            flap_detection_on_down:
+              type: "integer"
+              example: null
+            flap_detection_on_unreachable:
+              type: "integer"
+              example: null
+            low_flap_threshold:
+              type: "integer"
+              example: null
+            high_flap_threshold:
+              type: "integer"
+              example: null
+            process_performance_data:
+              type: "integer"
+              example: null
+            freshness_checks_enabled:
+              type: "integer"
+              example: null
+            freshness_threshold:
+              type: "integer"
+              example: null
+            passive_checks_enabled:
+              type: "integer"
+              example: null
+            event_handler_enabled:
+              type: "integer"
+              example: null
+            active_checks_enabled:
+              type: boolean
+              example: null
+            retain_status_information:
+              type: "integer"
+              example: null
+            retain_nonstatus_information:
+              type: "integer"
+              example: null
+            notifications_enabled:
+              type: "integer"
+              example: null
+            notes:
+              type: "integer"
+              example: null
+            priority:
+              type: "integer"
+              example: null
+            check_period_id:
+              type: "integer"
+              example: null
+            notify_period_id:
+              type: "integer"
+              example: null
+            tags:
+              type: "string"
+              example: null
+            own_contacts:
+              type: "integer"
+              example: 0
+            own_contactgroups:
+              type: "integer"
+              example: 0
+            own_customvariables:
+              type: "integer"
+              example: 0
+            host_url:
+              type: "string"
+              example: null
+            satellite_id:
+              type: "integer"
+              example: 0
+            host_type:
+              type: "integer"
+              example: 1
+            disabled:
+              type: "integer"
+              example: 0
+            usage_flag:
+              type: "integer"
+              example: 0
+            created:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+            modified:
+              type: "integer"
+              example: "2021-10-18T06:46:30+00:00"
+        services:
+          type: "object"
+          properties:
+            cpu_percentage:
+              type: "object"
+              properties:
+                host_id:
+                  type: "integer"
+                  example: 18
+                servicetemplate_id:
+                  type: "integer"
+                  example: 51
+                name:
+                  type: "string"
+                  example: "CPU usage percentage"
+                servicecommandargumentvalues:
+                  type: array
+                  items:
+                    type: object
+                    anyOf:
+                      - $ref: "#/components/schemas/getAgentCreateServicesCPUServiceCommandargumentvalues1"
+                      - $ref: "#/components/schemas/getAgentCreateServicesCPUServiceCommandargumentvalues2"
+                      - $ref: "#/components/schemas/getAgentCreateServicesCPUServiceCommandargumentvalues3"
+            memory:
+              type: "object"
+              properties:
+                host_id:
+                  type: "integer"
+                  example: 18
+                servicetemplate_id:
+                  type: "integer"
+                  example: 53
+                name:
+                  type: "string"
+                  example: "Memory usage percentage"
+                servicecommandargumentvalues:
+                  type: array
+                  items:
+                    type: object
+                    anyOf:
+                      - $ref: "#/components/schemas/getAgentCreateServicesMEMORYServiceCommandargumentvalues1"
+                      - $ref: "#/components/schemas/getAgentCreateServicesMEMORYServiceCommandargumentvalues2"
+                      - $ref: "#/components/schemas/getAgentCreateServicesMEMORYServiceCommandargumentvalues3"
+        connection_test:
+          type: string
+          example: null
+        config:
+          type: "object"
+          properties:
+            string:
+              type: object
+              properties:
+                bind_address:
+                  type: "string"
+                  example: "0.0.0.0"
+                username:
+                  type: "string"
+                  example: ""
+                password:
+                  type: "string"
+                  example: ""
+                push_oitc_server_url:
+                  type: "string"
+                  example: ""
+                push_oitc_api_key:
+                  type: "string"
+                  example: ""
+                operating_system:
+                  type: "string"
+                  example: "linux"
+                push_proxy_address:
+                  type: "string"
+                  example: ""
+                customchecks_path:
+                  type: "string"
+                  example: ""
+                ssl_certfile:
+                  type: "string"
+                  example: ""
+                ssl_keyfile:
+                  type: "string"
+                  example: ""
+                autossl_folder:
+                  type: "string"
+                  example: ""
+                autossl_csr_file:
+                  type: "string"
+                  example: ""
+                autossl_crt_file:
+                  type: "string"
+                  example: ""
+                autossl_key_file:
+                  type: "string"
+                  example: ""
+                autossl_ca_file:
+                  type: "string"
+                  example: ""
+                config_version:
+                  type: "string"
+                  example: "3.0.0"
+            bool:
+              type: object
+              properties:
+                enable_push_mode:
+                  type: "bool"
+                  example: false
+                use_proxy:
+                  type: "bool"
+                  example: false
+                enable_remote_config_update:
+                  type: "bool"
+                  example: false
+                use_http_basic_auth:
+                  type: "bool"
+                  example: false
+                push_verify_server_certificate:
+                  type: "bool"
+                  example: false
+                push_enable_webserver:
+                  type: "bool"
+                  example: false
+                push_webserver_use_https:
+                  type: "bool"
+                  example: true
+                use_autossl:
+                  type: "bool"
+                  example: true
+                use_https:
+                  type: "bool"
+                  example: false
+                use_https_verify:
+                  type: "bool"
+                  example: false
+                cpustats:
+                  type: "bool"
+                  example: true
+                memory:
+                  type: "bool"
+                  example: true
+                swap:
+                  type: "bool"
+                  example: true
+                processstats:
+                  type: "bool"
+                  example: true
+                netstats:
+                  type: "bool"
+                  example: true
+                netio:
+                  type: "bool"
+                  example: true
+                diskstats:
+                  type: "bool"
+                  example: true
+                diskio:
+                  type: "bool"
+                  example: true
+                systemdservices:
+                  type: "bool"
+                  example: true
+                launchdservices:
+                  type: "bool"
+                  example: true
+                winservices:
+                  type: "bool"
+                  example: true
+                wineventlog:
+                  type: "bool"
+                  example: true
+                sensorstats:
+                  type: "bool"
+                  example: true
+                dockerstats:
+                  type: "bool"
+                  example: false
+                libvirt:
+                  type: "bool"
+                  example: true
+                userstats:
+                  type: "bool"
+                  example: true
+            int:
+              type: object
+              properties:
+                bind_port:
+                  type: "integer"
+                  example: 3333
+                check_interval:
+                  type: "integer"
+                  example: 30
+                push_timeout:
+                  type: "integer"
+                  example: 10
+            array:
+              type: object
+              properties:
+                win_eventlog_types:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "System","Application","Security" ]
+
+    getAgentCreateServicesCPUServiceCommandargumentvalues1:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 32
+        commandargument_id:
+          type: integer
+          example: 40
+        servicetemplate_id:
+          type: integer
+          example: 51
+        value:
+          type: string
+          example: "85"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 40
+            name:
+              type: string
+              example: "$ARG1$"
+            human_name:
+              type: string
+              example: "Warning %"
+            command_id:
+              type: integer
+              example: 33
+
+    getAgentCreateServicesCPUServiceCommandargumentvalues2:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 33
+        commandargument_id:
+          type: integer
+          example: 41
+        servicetemplate_id:
+          type: integer
+          example: 51
+        value:
+          type: string
+          example: "90"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 41
+            name:
+              type: string
+              example: "$ARG2$"
+            human_name:
+              type: string
+              example: "Critical %"
+            command_id:
+              type: integer
+              example: 33
+    getAgentCreateServicesCPUServiceCommandargumentvalues3:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 34
+        commandargument_id:
+          type: integer
+          example: 42
+        servicetemplate_id:
+          type: integer
+          example: 51
+        value:
+          type: string
+          example: "0"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 42
+            name:
+              type: string
+              example: "$ARG3$"
+            human_name:
+              type: string
+              example: "Per core 1/0"
+            command_id:
+              type: integer
+              example: 33
+
+    getAgentCreateServicesMEMORYServiceCommandargumentvalues1:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 38
+        commandargument_id:
+          type: integer
+          example: 46
+        servicetemplate_id:
+          type: integer
+          example: 53
+        value:
+          type: string
+          example: "80"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 46
+            name:
+              type: string
+              example: "$ARG1$"
+            human_name:
+              type: string
+              example: "Warning"
+            command_id:
+              type: integer
+              example: 35
+    getAgentCreateServicesMEMORYServiceCommandargumentvalues2:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 39
+        commandargument_id:
+          type: integer
+          example: 47
+        servicetemplate_id:
+          type: integer
+          example: 53
+        value:
+          type: string
+          example: "90"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 47
+            name:
+              type: string
+              example: "$ARG2$"
+            human_name:
+              type: string
+              example: "Critical"
+            command_id:
+              type: integer
+              example: 35
+    getAgentCreateServicesMEMORYServiceCommandargumentvalues3:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 40
+        commandargument_id:
+          type: integer
+          example: 48
+        servicetemplate_id:
+          type: integer
+          example: 53
+        value:
+          type: string
+          example: "%"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 48
+            name:
+              type: string
+              example: "$ARG3$"
+            human_name:
+              type: string
+              example: "Unit"
+            command_id:
+              type: integer
+              example: 35
+
+    getAgentCreateServicesDockerServiceCommandargumentvalues1:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 270
+        commandargument_id:
+          type: integer
+          example: 135
+        servicetemplate_id:
+          type: integer
+          example: 129
+        value:
+          type: string
+          example: "docker.service"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 135
+            name:
+              type: string
+              example: "$ARG1$"
+            human_name:
+              type: string
+              example: "Match"
+            command_id:
+              type: integer
+              example: 63
+    getAgentCreateServicesDockerServiceCommandargumentvalues2:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 271
+        commandargument_id:
+          type: integer
+          example: 136
+        servicetemplate_id:
+          type: integer
+          example: 129
+        value:
+          type: string
+          example: "1"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 136
+            name:
+              type: string
+              example: "$ARG2$"
+            human_name:
+              type: string
+              example: "Strict"
+            command_id:
+              type: integer
+              example: 63
+
+    getAgentCreateServicesSSHServiceCommandargumentvalues1:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 270
+        commandargument_id:
+          type: integer
+          example: 135
+        servicetemplate_id:
+          type: integer
+          example: 129
+        value:
+          type: string
+          example: "ssh.service"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 135
+            name:
+              type: string
+              example: "$ARG1$"
+            human_name:
+              type: string
+              example: "Match"
+            command_id:
+              type: integer
+              example: 63
+    getAgentCreateServicesSSHServiceCommandargumentvalues2:
+      type: "object"
+      required:
+        - id
+        - commandargument_id
+        - servicetemplate_id
+        - value
+        - commandargument
+      properties:
+        id:
+          type: integer
+          example: 271
+        commandargument_id:
+          type: integer
+          example: 136
+        servicetemplate_id:
+          type: integer
+          example: 129
+        value:
+          type: string
+          example: "1"
+        commandargument:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 136
+            name:
+              type: string
+              example: "$ARG2$"
+            human_name:
+              type: string
+              example: "Strict"
+            command_id:
+              type: integer
+              example: 63
