@@ -29,7 +29,7 @@ Make sure, that the ports 80 and 81 are not used yet!
 
 ```
 docker run -v $PWD:/usr/share/nginx/html:ro -v $PWD/nginx-example.conf:/etc/nginx/conf.d/default.conf:ro -d -p 80:80 --name swagger-ui nginx
-docker run -d -p 81:8080 -e SWAGGER_FILE=/usr/share/nginx/html/oitc/index.yaml -v $PWD:/usr/share/nginx/html/oitc -v $PWD/external:/usr/share/nginx/html/external --name swagger-editor srvitsmdrone01.master.dns:5000/swagger-editor
+docker run -d -p 81:8080 -e SWAGGER_FILE=/usr/share/nginx/html/oitc/index.yaml -v $PWD:/usr/share/nginx/html/oitc -v $PWD/external:/usr/share/nginx/html/external swaggerapi/swagger-editor
 ```
 
 Note:
