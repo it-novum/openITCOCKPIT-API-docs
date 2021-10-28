@@ -126,7 +126,7 @@ requests:
           required: true
           schema:
             type: integer
-          example: 4
+          example: 2
       responses:
         200:
           description: ''
@@ -157,7 +157,7 @@ requests:
           required: true
           schema:
             type: integer
-          example: 4
+          example: 2
       responses:
         200:
           description: ''

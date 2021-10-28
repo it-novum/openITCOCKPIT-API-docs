@@ -672,9 +672,8 @@ components:
         customvariables:
           type: array
           items:
-            type: object
-            allOf:
-              - $ref: "#/components/schemas/postServicesRequestServiceCustomvariables"
+            type: string
+          example: [ ]
         servicecommandargumentvalues:
           type: array
           items:
@@ -684,7 +683,9 @@ components:
               - $ref: "#/components/schemas/postServicesRequestServiceCommandargumentvalues2"
         serviceeventcommandargumentvalues:
           type: array
-          items: {}
+          items:
+           type: string
+          example: []
 
     postServicesRequestServiceCustomvariables:
       type: "object"
@@ -958,9 +959,8 @@ components:
         customvariables:
           type: array
           items:
-            type: object
-            allOf:
-              - $ref: "#/components/schemas/postServicesEditRequestServiceCustomvariables"
+            type: string
+          example: [ ]
         servicecommandargumentvalues:
           type: array
           items:
@@ -970,7 +970,9 @@ components:
               - $ref: "#/components/schemas/postServicesEditRequestServiceCommandargumentvalues2"
         serviceeventcommandargumentvalues:
           type: array
-          items: {}
+          items:
+            type: string
+          example: [ ]
 
     postServicesEditRequestServiceCustomvariables:
       type: "object"

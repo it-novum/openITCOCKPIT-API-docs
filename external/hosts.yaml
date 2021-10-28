@@ -606,9 +606,8 @@ components:
         customvariables:
           type: array
           items:
-            type: object
-            allOf:
-              - $ref: "#/components/schemas/postHostsRequestHostCustomvariables"
+            type: string
+          example: [ ]
         hostcommandargumentvalues:
           type: array
           items:

@@ -126,7 +126,7 @@ requests:
           required: true
           schema:
             type: integer
-          example: 4
+          example: 6
       responses:
         200:
           description: ''
@@ -157,7 +157,7 @@ requests:
           required: true
           schema:
             type: integer
-          example: 4
+          example: 6
       responses:
         200:
           description: ''
@@ -290,7 +290,7 @@ components:
       properties:
         id:
           type: integer
-          example: 4
+          example: 6
         uuid:
           type: "string"
           example: "6bae032f-84bd-4ae3-9183-610e8676f7ba"
