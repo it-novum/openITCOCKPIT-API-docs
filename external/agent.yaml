@@ -397,6 +397,9 @@ components:
             id:
               type: "integer"
               example: 2
+            agent_uuid:
+              type: "string"
+              example: "089badce-d2ff-4f34-8063-1138b713b186"
             host_id:
               type: "string"
               example: "18"
@@ -683,6 +686,9 @@ components:
             name:
               type: "string"
               example: "agent (127.0.0.1)"
+            agent_uuid:
+              type: "string"
+              example: "089badce-d2ff-4f34-8063-1138b713b186"
         selectedPushAgentId:
           type: "string"
           example: 2
