@@ -397,6 +397,9 @@ components:
             id:
               type: "integer"
               example: 2
+            agent_uuid:
+              type: "string"
+              example: "089badce-d2ff-4f34-8063-1138b713b186"
             host_id:
               type: "string"
               example: "18"
@@ -675,16 +678,21 @@ components:
               type: "integer"
               example: "2021-10-18T06:46:30+00:00"
         pushAgents:
-          type: "object"
-          properties:
-            id:
-              type: "integer"
-              example: 2
-            name:
-              type: "string"
-              example: "agent (127.0.0.1)"
+          type: array
+          items:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                example: 2
+              name:
+                type: "string"
+                example: "agent (127.0.0.1)"
+              agent_uuid:
+                type: "string"
+                example: "089badce-d2ff-4f34-8063-1138b713b186"
         selectedPushAgentId:
-          type: "string"
+          type: "integer"
           example: 2
 
     getAgentInstallResponse:
